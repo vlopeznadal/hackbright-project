@@ -1,0 +1,5 @@
+*secret.*
+env
+*.pyc
+.DS_Store
+__pycache__
