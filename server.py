@@ -13,12 +13,6 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 @app.route("/")
-def homepage():
-    """show my homepage"""
-
-    return render_template('homepage.html')
-
-@app.route("/account")
 def account():
     """show login and registeration"""
 
@@ -28,7 +22,18 @@ def account():
 def login():
     """login to account"""
 
-    return redirect("/")
+    email = request.form.get("login-email")
+    password = request.form.get("login-password")
+
+    user = crud.get_user(email)
+
+    if password == user.password:
+            session["user"] = user.user_id
+    else:
+            flash("Incorrect password.")
+
+    return render_template('main.html')
+
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -42,9 +47,9 @@ def register():
         flash("An account with this email already exists.")
     else:
         crud.create_user(email, password)
-        flash ("Your account was created! Log in now.")
+        flash("Your account was created! Log in now.")
 
-    return redirect ("/account")
+    return redirect ("/")
 
 
 if __name__ == '__main__':
