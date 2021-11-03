@@ -11,10 +11,10 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(50), nullable=False)
 
-    favorite = db.relationship("Favorites", back_populates="user")
+    favorites = db.relationship("Favorites", back_populates="user")
 
     def __repr__(self):
         return f"<User user_id={self.user_id} email={self.email}>"
@@ -26,15 +26,15 @@ class Favorites(db.Model):
 
     query_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    cafe_query = db.Column(db.String, nullable=False)
-    cafe_name = db.Column(db.String, nullable=False)
-    image_url = db.Column(db.String)
+    cafe_id = db.Column(db.String(50), nullable=False)
+    cafe_name = db.Column(db.String(50), nullable=False)
+    image_url = db.Column(db.String(50))
     cafe_address = db.Column(db.String, nullable=False)
 
-    user = db.relationship("User", back_populates="favorite")
+    user = db.relationship("User", back_populates="favorites")
 
     def __repr__(self):
-        return f"<Favorites query_id={self.query_id} user_id={self.user_id} cafe_query={self.cafe_query}>"
+        return f"<Favorites query_id={self.query_id} user_id={self.user_id} cafe_id={self.cafe_id}>"
 
 def connect_to_db(app, db_name):
     app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{db_name}"
