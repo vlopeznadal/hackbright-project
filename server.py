@@ -51,6 +51,13 @@ def register():
 
     return redirect ("/")
 
+@app.route("/cafes", methods=["POST"])
+def query():
+    """search for cafes"""
+
+    cafes= crud.get_cafes()
+
+    return render_template('results.html', cafes=cafes)
 
 if __name__ == '__main__':
     connect_to_db(app, "cafes")
