@@ -27,9 +27,9 @@ SET default_table_access_method = heap;
 CREATE TABLE public.favorites (
     query_id integer NOT NULL,
     user_id integer,
-    cafe_query character varying NOT NULL,
-    cafe_name character varying NOT NULL,
-    image_url character varying,
+    cafe_id character varying(50) NOT NULL,
+    cafe_name character varying(50) NOT NULL,
+    image_url character varying(50),
     cafe_address character varying NOT NULL
 );
 
@@ -64,8 +64,8 @@ ALTER SEQUENCE public.favorites_query_id_seq OWNED BY public.favorites.query_id;
 
 CREATE TABLE public.users (
     user_id integer NOT NULL,
-    email character varying NOT NULL,
-    password character varying NOT NULL
+    email character varying(50) NOT NULL,
+    password character varying(50) NOT NULL
 );
 
 
@@ -111,7 +111,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: virginialopeznadal
 --
 
-COPY public.favorites (query_id, user_id, cafe_query, cafe_name, image_url, cafe_address) FROM stdin;
+COPY public.favorites (query_id, user_id, cafe_id, cafe_name, image_url, cafe_address) FROM stdin;
 \.
 
 
