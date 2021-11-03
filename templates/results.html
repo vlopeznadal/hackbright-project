@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Cafe Finder - Results{% endblock %}
+
+{% block content %} 
+{% for cafe in cafes %}
+  <h1>{{ cafe.name }}</h1>
+  <p><img src="{{ cafe.image_url }}" /></p>
+  <p>{{ cafe.location.address1 }}</p>
+  <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
+  <p>{{ cafe.display_phone }}</p>
+  <p></p>
+{% endfor %}
+{% endblock %}
