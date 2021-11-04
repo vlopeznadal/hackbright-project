@@ -31,20 +31,21 @@ def get_cafes():
     cafe_search = res.json()
 
     cafes = cafe_search['businesses']
-
-    # cafe_ids = []
-
-    # for cafe in cafes:
-    #     cafe_ids.append(cafe['id'])
     
     return cafes
 
-# def get_cafe_info(cafe_ids):
-#     all_cafes = []
-#     headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
-#     for id in cafe_ids:
-#         res2 = requests.get(f'https://api.yelp.com/v3/businesses/{id}', headers=headers)
-#         cafe_info = res2.json()
-#         all_cafes.append(cafe_info)
-#     print(all_cafes)
-#     return all_cafes
+def get_cafe_by_id(cafe_id):
+    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+    res = requests.get(f'https://api.yelp.com/v3/businesses/{cafe_id}', headers=headers)
+    cafe_info = res.json()
+
+    return cafe_info
+
+def get_cafe_reviews(cafe_id):
+    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+    res = requests.get(f'https://api.yelp.com/v3/businesses/{cafe_id}/reviews', headers=headers)
+    cafe_reviews = res.json()
+
+    reviews = cafe_reviews['reviews']
+
+    return reviews
