@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
-from model import connect_to_db
+from model import connect_to_db, Favorites
 
 from jinja2 import StrictUndefined
 
@@ -58,6 +58,20 @@ def query():
     cafes= crud.get_cafes()
 
     return render_template('results.html', cafes=cafes)
+
+@app.route("/cafes/<cafe_id>")
+def show_specific_cafe(cafe_id):
+    """show the cafe details page"""
+    cafe = crud.get_cafe_by_id(cafe_id)
+
+    reviews= crud.get_cafe_reviews(cafe_id)
+
+    return render_template("details.html", cafe=cafe, review=reviews)
+
+@app.route("/favorite")
+def favorite():
+    favorite = Favorites(name="Tiger", color="grey", hunger=20)
+    pass
 
 if __name__ == '__main__':
     connect_to_db(app, "cafes")
