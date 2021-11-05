@@ -15,8 +15,11 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/")
 def account():
     """show login and registeration"""
+    login=False
+    if 'user' in session:
+        login=True
 
-    return render_template('login.html')
+    return render_template('homepage.html', login=login)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -32,7 +35,12 @@ def login():
     else:
             flash("Incorrect password.")
 
-    return render_template('main.html')
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    session.pop('user', None)
+    return redirect("/")
 
 
 @app.route("/register", methods=["POST"])
