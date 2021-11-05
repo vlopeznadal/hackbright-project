@@ -66,8 +66,6 @@ def show_specific_cafe(cafe_id):
 
     reviews= crud.get_cafe_reviews(cafe_id)
 
-    print(reviews)
-
     session["cafe_id"] = cafe_id
     session["cafe_name"] = cafe["name"]
     session["image_url"] = cafe["image_url"]
