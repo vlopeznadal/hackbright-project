@@ -29,8 +29,11 @@ CREATE TABLE public.favorites (
     user_id integer,
     cafe_id character varying(50) NOT NULL,
     cafe_name character varying(50) NOT NULL,
-    image_url character varying(50),
-    cafe_address character varying NOT NULL
+    image_url character varying(100),
+    cafe_street character varying(50) NOT NULL,
+    cafe_city character varying(50) NOT NULL,
+    cafe_state character varying(50) NOT NULL,
+    cafe_zip character varying(50) NOT NULL
 );
 
 
@@ -111,7 +114,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: virginialopeznadal
 --
 
-COPY public.favorites (query_id, user_id, cafe_id, cafe_name, image_url, cafe_address) FROM stdin;
+COPY public.favorites (query_id, user_id, cafe_id, cafe_name, image_url, cafe_street, cafe_city, cafe_state, cafe_zip) FROM stdin;
 \.
 
 
