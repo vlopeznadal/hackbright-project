@@ -3,10 +3,10 @@
 {% block title %} Cafe Finder - Profile{% endblock %}
 
 {% block content %} 
-<h2>Favorites</h2>
+<h1>Favorites</h1>
 {% for cafe in favorite_cafes %}
-  <h1><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h1>
-  <p><img src="{{ cafe.image_url }}" /></p>
+  <h2><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
+  <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
   <p>{{ cafe.cafe_street }}</p>
   <p>{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
 {% endfor %}
