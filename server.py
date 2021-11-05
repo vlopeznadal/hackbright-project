@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
-from model import connect_to_db, Favorites
+from model import connect_to_db, Favorites, db
 
 from jinja2 import StrictUndefined
 
@@ -66,12 +66,47 @@ def show_specific_cafe(cafe_id):
 
     reviews= crud.get_cafe_reviews(cafe_id)
 
+    session["cafe_id"] = cafe_id
+    session["cafe_name"] = cafe["name"]
+    session["image_url"] = cafe["image_url"]
+    session["cafe_street"] = cafe["location"]["address1"]
+    session["cafe_city"] = cafe["location"]["city"]
+    session["cafe_state"] = cafe["location"]["state"]
+    session["cafe_zip"] = cafe["location"]["zip_code"]
     return render_template("details.html", cafe=cafe, review=reviews)
 
 @app.route("/favorite")
 def favorite():
-    favorite = Favorites(name="Tiger", color="grey", hunger=20)
-    pass
+    favorite = Favorites(user_id=session["user"], cafe_id=session["cafe_id"], cafe_name=session["cafe_name"], image_url=session["image_url"], cafe_street=session["cafe_street"], 
+    cafe_city=session["cafe_city"], cafe_state=session["cafe_state"], cafe_zip=session["cafe_zip"])
+    db.session.add(favorite)
+    db.session.commit()
+    return " "
+
+@app.route("/unfavorite")
+def unfavorite():
+    unfavorite = Favorites.query.filter_by(cafe_id=session["cafe_id"]).one()
+    db.session.delete(unfavorite)
+    db.session.commit()
+    return " "
+
+@app.route("/database")
+def check_database():
+    check = Favorites.query.filter((Favorites.cafe_id==session["cafe_id"]) & (Favorites.user_id==session["user"])).first()
+    if check is not None:
+        return "bi-heart-fill"
+    else:
+        return "bi-heart"
+
+@app.route("/user/<user_id>")
+def show_user_profile(user_id):
+    user = crud.get_user_by_id(user_id)
+
+    favorite_cafes = crud.get_user_favorites(user_id)
+    print(favorite_cafes)
+
+    return render_template("profile.html", user=user, favorite_cafes=favorite_cafes)
+
 
 if __name__ == '__main__':
     connect_to_db(app, "cafes")
