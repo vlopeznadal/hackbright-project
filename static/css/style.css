@@ -1,0 +1,31 @@
+#favorite, #heart {
+    color: red;
+    cursor: pointer;
+}
+.reviewer_photo {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.w-100 {
+    max-height: 1000px;
+    object-fit: cover;
+}
+
+.cafe_photo {
+    width: 500px;
+    height: 400px;
+}
+
+h1 {
+    color: black;
+}
+
+h2 {
+    color: black;
+}
+
+.flash-msg {
+    color: red;
+}
