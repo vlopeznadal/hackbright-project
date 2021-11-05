@@ -18,6 +18,14 @@ def get_user(email):
     
     return User.query.filter(User.email == email).first()
 
+def get_user_by_id(user_id):
+
+    return User.query.filter(User.user_id == user_id).first()
+
+def get_user_favorites(user_id):
+
+    return Favorites.query.filter(Favorites.user_id == user_id).all()
+
 def get_cafes():
     zipcode = request.form.get("zipcode")
     radius = request.form.get("radius")
