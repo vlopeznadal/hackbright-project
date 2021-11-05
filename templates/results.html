@@ -4,8 +4,8 @@
 
 {% block content %} 
 {% for cafe in cafes %}
-  <h1><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h1>
-  <p><img src="{{ cafe.image_url }}" /></p>
+  <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
+  <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
   <p>{{ cafe.location.address1 }}</p>
   <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
   <p>{{ cafe.display_phone }}</p>
