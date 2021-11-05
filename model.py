@@ -28,8 +28,11 @@ class Favorites(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     cafe_id = db.Column(db.String(50), nullable=False)
     cafe_name = db.Column(db.String(50), nullable=False)
-    image_url = db.Column(db.String(50))
-    cafe_address = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String(100))
+    cafe_street = db.Column(db.String(50), nullable=False)
+    cafe_city = db.Column(db.String(50), nullable=False)
+    cafe_state = db.Column(db.String(50), nullable=False)
+    cafe_zip = db.Column(db.String(50), nullable=False)
 
     user = db.relationship("User", back_populates="favorites")
 
