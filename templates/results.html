@@ -2,6 +2,10 @@
 
 {% block title %} Cafe Finder - Results{% endblock %}
 
+{% block head %}
+
+{% endblock %}
+
 {% block content %} 
 {% for cafe in cafes %}
   <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
