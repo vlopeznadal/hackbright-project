@@ -45,6 +45,7 @@
   <p>"{{ review[i]['text'] }}"</p>
   <p><button><a href="{{ review[i]['url'] }}">Read the rest</a></button></p>
   {% endfor %}
+  <div id="map"></div>
 {% endblock %}
 
-{% block scripts %}<script src="/static/favorites.js" type="text/javascript"></script>{% endblock %}
+{% block scripts %}<script src="/static/js/favorites.js" type="text/javascript"></script>{% endblock %}
