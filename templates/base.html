@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <body>
+      {% block header %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
               <a class="navbar-brand" href="/">Project Title</a>
@@ -18,13 +19,14 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  <a class="nav-link" href="/login"><i class="bi bi-search"></i></a>
+                  <a class="nav-link" href="/"><i class="bi bi-search"></i></a>
                   <a class="nav-link" href="/user/{{ session['user'] }}"><i class="bi bi-person-circle"></i></a>
-                  <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
+                  <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
                 </div>
               </div>
             </div>
           </nav>
+      {% endblock %}
         {% for msg in get_flashed_messages() %}
         <p class="flash-msg">
         {{ msg }}
