@@ -30,10 +30,12 @@ def login():
 
     user = crud.get_user(email)
 
-    if password == user.password:
-            session["user"] = user.user_id
+    if user == None:
+        flash("Account does not exist. Registration required.")
+    elif password == user.password:
+        session["user"] = user.user_id
     else:
-            flash("Incorrect password.")
+        flash("Incorrect password.")
 
     return redirect("/")
 
@@ -64,6 +66,10 @@ def query():
     """search for cafes"""
 
     cafes= crud.get_cafes()
+
+    if cafes == "error":
+        flash("Please input a valid zipcode.")
+        return redirect("/")
 
     return render_template('results.html', cafes=cafes)
 
