@@ -30,6 +30,14 @@ def get_cafes():
     zipcode = request.form.get("zipcode")
     radius = request.form.get("radius")
 
+    try:
+        int(zipcode)
+    except ValueError:
+        return "error"
+
+    if int(zipcode) < 0:
+        return "error"
+
     location = {'categories': 'cafes', 'location': zipcode, 'radius': radius, 'limit': 5}
     headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
 
