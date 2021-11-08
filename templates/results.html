@@ -3,7 +3,11 @@
 {% block title %} Cafe Finder - Results{% endblock %}
 
 {% block head %}
-
+<script src="/static/js/map.js"></script>
+  <script
+    async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=bf545e16b59f18e2&callback=initMap">
+  </script>
 {% endblock %}
 
 {% block content %} 
@@ -14,4 +18,5 @@
   <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
   <p>{{ cafe.display_phone }}</p>
 {% endfor %}
+<div id="map"></div>
 {% endblock %}
