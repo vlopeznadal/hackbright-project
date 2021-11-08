@@ -29,3 +29,7 @@ h2 {
 .flash-msg {
     color: red;
 }
+
+#map {
+    height: 60vh;
+}
