@@ -3,7 +3,7 @@ function initMap() {
             const coordinates = response;
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: coordinates[1]["latitude"], lng: coordinates[1]["longitude"]},
-                zoom: 12,
+                zoom: 13,
                 mapId: 'bf545e16b59f18e2'
             });
 
@@ -12,6 +12,10 @@ function initMap() {
                     position: {lat: coordinates[marker]["latitude"], lng: coordinates[marker]["longitude"]},
                     map,
                     title: "Cafe" + marker,
+                    icon: {
+                        url: "/static/img/markers/marker-" + marker + ".svg",
+                        scaledSize: new google.maps.Size(38, 31)
+                    }
                 });
                 $.get('/markers', response => {
                     const markerInfo = response;
