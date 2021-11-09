@@ -126,7 +126,6 @@ def show_user_profile(user_id):
     user = crud.get_user_by_id(user_id)
 
     favorite_cafes = crud.get_user_favorites(user_id)
-    print(favorite_cafes)
 
     return render_template("profile.html", user=user, favorite_cafes=favorite_cafes)
 
