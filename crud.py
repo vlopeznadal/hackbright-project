@@ -1,8 +1,8 @@
 """CRUD operations."""
 from flask import (request, session)
 from model import db, User, Favorites, connect_to_db
+import datetime
 import requests, os
-import json
 
 def create_user(email, password):
     """Create and return a new user."""
@@ -81,6 +81,19 @@ def get_cafe_reviews(cafe_id):
     reviews = cafe_reviews['reviews']
 
     return reviews
+
+def get_review_dates(reviews):
+    print(reviews)
+
+    review_dates = []
+
+    for i in range(3):
+        date = reviews[i]['time_created']
+        formatted_date = datetime.datetime.strptime(date, '%Y-%m-%d  %H:%M:%S').strftime('%-m/%-d/%y %-I:%M %p')
+        review_dates.append(formatted_date)
+
+    print(review_dates)
+    return review_dates
 
 def get_cafe_coordinates(cafes):
 
