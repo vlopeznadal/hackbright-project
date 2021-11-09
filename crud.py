@@ -83,7 +83,6 @@ def get_cafe_reviews(cafe_id):
     return reviews
 
 def get_review_dates(reviews):
-    print(reviews)
 
     review_dates = []
 
@@ -92,7 +91,6 @@ def get_review_dates(reviews):
         formatted_date = datetime.datetime.strptime(date, '%Y-%m-%d  %H:%M:%S').strftime('%-m/%-d/%y %-I:%M %p')
         review_dates.append(formatted_date)
 
-    print(review_dates)
     return review_dates
 
 def get_cafe_coordinates(cafes):
@@ -114,7 +112,7 @@ def get_marker_info(cafes):
     counter = 0
 
     for cafe in cafes:
-        cafe_info[counter]= cafe["name"], cafe["id"]
+        cafe_info[counter]= cafe["name"], cafe["id"], cafe["location"]["address1"], cafe["location"]["city"], cafe["location"]["state"], cafe["location"]["zip_code"]
         counter += 1
     
     return cafe_info
