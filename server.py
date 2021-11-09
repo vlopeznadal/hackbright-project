@@ -65,13 +65,19 @@ def register():
 def query():
     """search for cafes"""
 
-    cafes= crud.get_cafes()
+    cafes = crud.get_cafes()
+
+    coordinates = []
+
+    for cafe in cafes:
+        coordinates.append(cafe["coordinates"])
 
     if cafes == "error":
         flash("Please input a valid zipcode.")
         return redirect("/")
 
-    return render_template('results.html', cafes=cafes)
+    return render_template('results.html', cafes=cafes, coordinates=coordinates)
+    
 
 @app.route("/cafes/<cafe_id>")
 def show_specific_cafe(cafe_id):
@@ -120,6 +126,20 @@ def show_user_profile(user_id):
     print(favorite_cafes)
 
     return render_template("profile.html", user=user, favorite_cafes=favorite_cafes)
+
+@app.route("/coordinates")
+def retrieve_coordinates():
+    cafes = crud.get_cafes_with_session()
+    coordinates = crud.get_cafe_coordinates(cafes)
+
+    return coordinates
+
+@app.route("/markers")
+def retrieve_marker_info():
+    cafes = crud.get_cafes_with_session()
+    marker_info = crud.get_marker_info(cafes)
+
+    return marker_info
 
 
 if __name__ == '__main__':
