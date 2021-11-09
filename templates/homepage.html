@@ -48,6 +48,11 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         {%else%}
+        {% for msg in get_flashed_messages() %}
+        <p class="flash-msg">
+        {{ msg }}
+        </p>
+        {% endfor %}
           <h1>Create an account</h1>
           <form action="/register" method="POST">
               <div class="mb-3">
