@@ -38,14 +38,20 @@
 
   <h2>Reviews</h2>
   {% for i in range(3) %}
-  <p>{{ review[i]['user']['name'] }}</p>
+  <div class="reviewer">
   {% if review[i]['user']['image_url'] %}
-  <p><img src="{{ review[i]['user']['image_url'] }}" class="reviewer_photo"/></p>
+  <img src="{{ review[i]['user']['image_url'] }}" class="reviewer_photo"/>
   {% else %}
-  <p><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/></p>
+  <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
   {% endif %}
-  <p>Rating: {{ review[i]['rating'] }} / 5</p>
-  <p>{{ review[i]['time_created'] }}</p>
+  {{ review[i]['user']['name'] }}
+  </div>
+    <p>
+    {% for s in range(review[i]['rating']) %}
+    <i class="bi bi-star-fill"></i>
+    {% endfor %}
+    </p>
+  <p>{{ review_dates[i] }}</p>
   <p>"{{ review[i]['text'] }}"</p>
   <p><button><a href="{{ review[i]['url'] }}">Read the rest</a></button></p>
   {% endfor %}
