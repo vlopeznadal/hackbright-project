@@ -2,15 +2,10 @@
 
 {% block title %} Cafe Finder - Results{% endblock %}
 
-{% block head %}
-<script src="/static/js/map.js"></script>
-  <script
-    async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=bf545e16b59f18e2&callback=initMap">
-  </script>
-{% endblock %}
-
 {% block content %} 
+<div class="container">
+<div class="row">
+<div class="col-5" id="info">
 {% for cafe in cafes %}
   <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
   <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
@@ -18,5 +13,16 @@
   <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
   <p>{{ cafe.display_phone }}</p>
 {% endfor %}
-<div id="map"></div>
+</div>
+<div class="col-7" id="map"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+<script src="/static/js/map.js"></script>
+<script
+  async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=bf545e16b59f18e2&callback=initMap">
+</script>
 {% endblock %}
