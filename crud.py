@@ -1,7 +1,8 @@
 """CRUD operations."""
-from flask import (request)
+from flask import (request, session)
 from model import db, User, Favorites, connect_to_db
 import requests, os
+import json
 
 def create_user(email, password):
     """Create and return a new user."""
@@ -30,6 +31,9 @@ def get_cafes():
     zipcode = request.form.get("zipcode")
     radius = request.form.get("radius")
 
+    session["zipcode"] = zipcode
+    session["radius"] = radius
+
     try:
         int(zipcode)
     except ValueError:
@@ -38,7 +42,20 @@ def get_cafes():
     if int(zipcode) < 0:
         return "error"
 
-    location = {'categories': 'cafes', 'location': zipcode, 'radius': radius, 'limit': 5}
+    location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
+    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+
+    res = requests.get('https://api.yelp.com/v3/businesses/search',
+                   params=location, headers=headers)
+
+    cafe_search = res.json()
+
+    cafes = cafe_search['businesses']
+    
+    return cafes
+
+def get_cafes_with_session():
+    location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
     headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
 
     res = requests.get('https://api.yelp.com/v3/businesses/search',
@@ -61,7 +78,31 @@ def get_cafe_reviews(cafe_id):
     headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
     res = requests.get(f'https://api.yelp.com/v3/businesses/{cafe_id}/reviews', headers=headers)
     cafe_reviews = res.json()
-
     reviews = cafe_reviews['reviews']
 
     return reviews
+
+def get_cafe_coordinates(cafes):
+
+    coordinates = {}
+
+    counter = 0
+
+    for cafe in cafes:
+        coordinates[counter]= cafe["coordinates"]
+        counter += 1
+    
+    return coordinates
+
+def get_marker_info(cafes):
+
+    cafe_info = {}
+
+    counter = 0
+
+    for cafe in cafes:
+        cafe_info[counter]= cafe["name"], cafe["id"]
+        counter += 1
+    
+    return cafe_info
+
