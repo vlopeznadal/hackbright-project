@@ -33,3 +33,11 @@ h2 {
 #map {
     height: 100vh;
 }
+
+.bi-star-fill {
+    color: #FFC300;
+}
+
+.reviewer {
+    display: inline-block;
+}
