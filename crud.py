@@ -93,6 +93,23 @@ def get_review_dates(reviews):
 
     return review_dates
 
+def get_cafe_hours(cafe):
+
+    cafe_hours = {}
+    for i in range(len(cafe["hours"][0]["open"])):
+        open = cafe["hours"][0]["open"][i]["start"]
+        close = cafe["hours"][0]["open"][i]["end"]
+        formatted_open = datetime.datetime.strptime(open, '%H%M').strftime('%-I:%M %p')
+        formatted_close = datetime.datetime.strptime(close, '%H%M').strftime('%-I:%M %p')
+        index = cafe["hours"][0]["open"][i]["day"]
+        cafe_hours[index] = [formatted_open, formatted_close]
+
+    cafe_hours[7] = cafe["hours"][0]["is_open_now"]
+
+    print(cafe_hours)
+
+    return cafe_hours
+
 def get_cafe_coordinates(cafes):
 
     coordinates = {}
