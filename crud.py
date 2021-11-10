@@ -1,6 +1,6 @@
 """CRUD operations."""
 from flask import (request, session)
-from model import db, User, Favorites, connect_to_db
+from model import db, User, Favorites
 import datetime
 import requests, os
 
@@ -54,6 +54,32 @@ def get_cafes():
     
     return cafes
 
+def get_google_cafe():
+    location = {'fields': 'place_id', 'input': session["cafe_name"], 'inputtype': 'textquery', 'key': 'AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0'} 
+    res = requests.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json', 
+                    params=location)
+
+    cafe = res.json()
+
+    cafe_id = cafe["candidates"][0]["place_id"]
+
+    print(cafe_id)
+    
+    return cafe_id
+
+def get_google_cafe_info(cafe_id):
+    location = {'place_id': cafe_id, 'key': 'AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0'} 
+    res = requests.get('https://maps.googleapis.com/maps/api/place/details/json?fields=rating%2Creview', 
+                    params=location)
+
+    cafe = res.json()
+
+    cafe_info = cafe["result"]
+    print(cafe_info)
+    
+    return cafe_info
+
+
 def get_cafes_with_session():
     location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
     headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
@@ -105,8 +131,6 @@ def get_cafe_hours(cafe):
         cafe_hours[index] = [formatted_open, formatted_close]
 
     cafe_hours[7] = cafe["hours"][0]["is_open_now"]
-
-    print(cafe_hours)
 
     return cafe_hours
 
