@@ -26,18 +26,28 @@ h2 {
     color: black;
 }
 
-.flash-msg {
+.flash-msg, .hours-state {
     color: red;
+    font-weight: bold;
 }
 
 #map {
     height: 100vh;
 }
 
-.bi-star-fill {
+.bi-star-fill, .bi-star-half {
     color: #FFC300;
 }
 
 .reviewer {
     display: inline-block;
+}
+
+th { 
+    text-align: center;
+}
+
+table, tr, td {
+    border: 1px solid black;
+    padding: 5px;
 }
