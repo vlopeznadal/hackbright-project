@@ -62,20 +62,17 @@ def get_google_cafe():
     cafe = res.json()
 
     cafe_id = cafe["candidates"][0]["place_id"]
-
-    print(cafe_id)
     
     return cafe_id
 
 def get_google_cafe_info(cafe_id):
     location = {'place_id': cafe_id, 'key': 'AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0'} 
-    res = requests.get('https://maps.googleapis.com/maps/api/place/details/json?fields=rating%2Creview', 
+    res = requests.get('https://maps.googleapis.com/maps/api/place/details/json?fields=rating%2Creview%2Cwebsite', 
                     params=location)
 
     cafe = res.json()
 
     cafe_info = cafe["result"]
-    print(cafe_info)
     
     return cafe_info
 
