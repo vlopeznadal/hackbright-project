@@ -36,13 +36,14 @@
       <p>{{ cafe.location.address1 }}</p>
       <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
       <p>{{ cafe.display_phone }}</p>
+      <p><a href="{{ google_cafe['website'] }}">Website</a></p>
+    </div>
+    <div class="col-3">
       {% if hours[7] == True %}
       <p class="hours-open">Open Now</p>
       {% else %}
       <p class="hours-closed">Closed Now</p>
       {% endif %}
-    </div>
-    <div class="col-3">
       <table>
         <thead>
           <tr>
