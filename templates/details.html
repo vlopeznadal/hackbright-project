@@ -30,12 +30,47 @@
     </button>
   </div>
   <h1>{{ cafe.name }}</h1>
+  <p>Yelp Rating: 
+  {% for s in range(cafe.rating|round|int) %}
+    <i class="bi bi-star-fill"></i>
+  {% endfor %}
+  {% if cafe.rating - cafe.rating|round|int == 0.5 %}
+    <i class="bi bi-star-half"></i>
+  {% endif %}
+  </p>
   <p>{{ cafe.location.address1 }}</p>
   <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
   <p>{{ cafe.display_phone }}</p>
   <p id="favorite">Favorite <i id="heart" class="bi bi-heart"></i></p>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% set day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+    {% for h in range(day|length) %}
+      {% if h in hours %}
+      <tr>
+        <td>{{ day[h] }}</td>
+        <td>{{ hours[h][0]}} - {{ hours[h][1] }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td>{{ day[h] }}</td>
+        <td>Closed</td>
+      </tr>
+    {% endif %}
+  {% endfor %}
 
-
+  {% if hours[7] == True %}
+  <p class="hours-state">Open Now</p>
+  {% else %}
+  <p class="hours-state">Closed Now</p>
+  {% endif %}
+  </tbody>
+</table>
   <h2>Reviews</h2>
   {% for i in range(3) %}
   <div class="reviewer">
