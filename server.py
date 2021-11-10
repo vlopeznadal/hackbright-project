@@ -84,8 +84,6 @@ def show_specific_cafe(cafe_id):
     """show the cafe details page"""
     cafe = crud.get_cafe_by_id(cafe_id)
 
-    print(cafe)
-
     hours = crud.get_cafe_hours(cafe)
 
     reviews= crud.get_cafe_reviews(cafe_id)
@@ -99,8 +97,11 @@ def show_specific_cafe(cafe_id):
     session["cafe_city"] = cafe["location"]["city"]
     session["cafe_state"] = cafe["location"]["state"]
     session["cafe_zip"] = cafe["location"]["zip_code"]
+
+    cafe_id = crud.get_google_cafe()
+    google_cafe = crud.get_google_cafe_info(cafe_id)
     
-    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours)
+    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe)
 
 @app.route("/favorite")
 def favorite():
