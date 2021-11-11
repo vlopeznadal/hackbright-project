@@ -1,3 +1,7 @@
+body, html {
+    height: 100%;
+}
+
 #favorite, #heart {
     color: red;
     cursor: pointer;
@@ -60,4 +64,11 @@ table, tr, td {
 .hours-closed {
     color: red;
     font-weight: bold;
+}
+
+.background {
+    background-image: url("/static/img/backgrounds/background-1.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 }
