@@ -37,6 +37,5 @@ function initMap() {
                 }
                 map.fitBounds (bounds);
             }
-            console.log(LatLngList);
     });
 }
