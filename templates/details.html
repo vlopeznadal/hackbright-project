@@ -2,6 +2,10 @@
 
 {% block title %} Cafe Finder - Results{% endblock %}
 
+{% block head %} 
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+{% endblock %}
+
 {% block content %} 
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -31,14 +35,14 @@
   </div>
   <div class="container">
     <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-4">
       <h1>{{ cafe.name }}</h1>
       <p>{{ cafe.location.address1 }}</p>
       <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
       <p>{{ cafe.display_phone }}</p>
-      <p><a href="{{ google_cafe['website'] }}">Website</a></p>
+      <p><a href="{{ google_cafe['website'] }}" target="_blank">Website</a></p>
     </div>
-    <div class="col-3">
+    <div class="col-4">
       {% if hours[7] == True %}
       <p class="hours-open">Open Now</p>
       {% else %}
@@ -68,16 +72,13 @@
       </tbody>
       </table>
     </div>
-    <div class="col-3">
-        <p>Yelp Rating: 
-          {% for s in range(cafe.rating|round|int) %}
-            <i class="bi bi-star-fill"></i>
-          {% endfor %}
-          {% if cafe.rating - cafe.rating|round|int == 0.5 %}
-            <i class="bi bi-star-half"></i>
-          {% endif %}
-        </p>
-        <p>Google Rating: {{ google_cafe ["rating"] }}</p>
+    <div class="col-4">
+        <p>Yelp Rating: {{ cafe.rating }} / 5</p>
+        <p>Google Rating: {{ google_cafe ["rating"] }} / 5</p>
+        <p>Foursquare Rating: {{ fs_cafe ["rating"] }} / 10</p>
+        <div id="ratings-chart">
+          <svg></svg>
+        </div>
         <p id="favorite">Favorite <i id="heart" class="bi bi-heart"></i></p>
     </div>
     </div>
@@ -110,9 +111,9 @@
       <h2>Google Reviews</h2>
       {% for i in range(5) %}
       <div class="reviewer">
-      {% if google_cafe['reviews'][i]['profile_photo_url'] %}
-      <img src="{{ google_cafe['reviews'][i]['profile_photo_url'] }}" class="reviewer_photo"/>
-      {% else %}
+        {% if google_cafe['reviews'][i]['profile_photo_url'] %}
+        <img src="{{ google_cafe['reviews'][i]['profile_photo_url'] }}" class="reviewer_photo"/>
+        {% else %}
       <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
       {% endif %}
       {{ google_cafe['reviews'][i]['author_name'] }}
@@ -131,4 +132,7 @@
   </div>
 {% endblock %}
 
-{% block scripts %}<script src="/static/js/favorites.js" type="text/javascript"></script>{% endblock %}
+{% block scripts %}
+<script src="/static/js/favorites.js" type="text/javascript"></script>
+<script src="/static/js/chart.js"></script>
+{% endblock %}

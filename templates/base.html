@@ -11,15 +11,11 @@
         {% block head %} {% endblock %}
     </head>
     <body>
-      {% block header %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
               <div class="navbar-nav">
                 <a class="nav-link" href="/"><i class="bi bi-search"></i></a>
               </div>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
               <div class="justify-content-center">
                 <a class="navbar-brand" href="/">Project Title</a>
               </div>
@@ -31,7 +27,6 @@
               </div>
             </div>
           </nav>
-      {% endblock %}
         {% for msg in get_flashed_messages() %}
         <p class="flash-msg">
         {{ msg }}
