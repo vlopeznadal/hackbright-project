@@ -100,8 +100,11 @@ def show_specific_cafe(cafe_id):
 
     cafe_id = crud.get_google_cafe()
     google_cafe = crud.get_google_cafe_info(cafe_id)
+
+    cafe_id2 = crud.get_fs_cafe()
+    fs_cafe = crud.get_fs_cafe_info(cafe_id2)
     
-    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe)
+    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe, fs_cafe=fs_cafe)
 
 @app.route("/favorite")
 def favorite():
@@ -147,6 +150,27 @@ def retrieve_marker_info():
     marker_info = crud.get_marker_info(cafes)
 
     return marker_info
+
+@app.route("/ratings")
+def retrieve_cafe_ratings():
+
+    yelp = crud.get_cafe_by_id(session["cafe_id"])
+
+    google_id = crud.get_google_cafe()
+
+    google = crud.get_google_cafe_info(google_id)
+
+    fs_id = crud.get_fs_cafe()
+
+    fs = crud.get_fs_cafe_info(fs_id)
+
+    yelp_rating = yelp["rating"]
+
+    google_rating = google["rating"]
+
+    fs_rating = fs["rating"]
+
+    return {'yelp': yelp_rating, 'google' : google_rating, 'fs' : fs_rating}
 
 
 if __name__ == '__main__':
