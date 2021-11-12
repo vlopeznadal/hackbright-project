@@ -76,6 +76,29 @@ def get_google_cafe_info(cafe_id):
     
     return cafe_info
 
+def get_fs_cafe():
+    location = {'fields': 'place_id', 'near': session["cafe_city"], 'query': session["cafe_name"], 'limit': 1,
+    'v': 20211111, 'client_id': os.environ['FS_CLIENT_ID'], 'client_secret': os.environ['FS_CLIENT_SECRET']}
+    res = requests.get('https://api.foursquare.com/v2/venues/search', 
+                    params=location)
+
+    cafe = res.json()
+
+    cafe_id = cafe['response']['venues'][0]['id']
+    
+    return cafe_id
+
+def get_fs_cafe_info(fs_id):
+    location = {'v': 20211111, 'client_id': os.environ['FS_CLIENT_ID'], 'client_secret': os.environ['FS_CLIENT_SECRET']} 
+    res = requests.get('https://api.foursquare.com/v2/venues/' + fs_id, 
+                    params=location)
+
+    cafe = res.json()
+
+    cafe_info = cafe['response']['venue']
+    
+    return cafe_info
+
 
 def get_cafes_with_session():
     location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
