@@ -39,6 +39,22 @@ class Favorites(db.Model):
     def __repr__(self):
         return f"<Favorites query_id={self.query_id} user_id={self.user_id} cafe_id={self.cafe_id}>"
 
+class Reviews(db.Model):
+    """A cafe review."""
+
+    __tablename__ = "reviews"
+
+    review_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    date = db.Column(db.DateTime, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    review = db.Column(db.String(500))
+
+    user = db.relationship("User", back_populates="reviews")
+
+    def __repr__(self):
+        return f"<Reviews review_id={self.review_id} user_id={self.user_id} date={self.date}>"
+
 def connect_to_db(app, db_name):
     app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{db_name}"
     app.config["SQLALCHEMY_ECHO"] = True
