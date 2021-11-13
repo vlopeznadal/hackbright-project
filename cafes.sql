@@ -62,6 +62,43 @@ ALTER SEQUENCE public.favorites_query_id_seq OWNED BY public.favorites.query_id;
 
 
 --
+-- Name: reviews; Type: TABLE; Schema: public; Owner: virginialopeznadal
+--
+
+CREATE TABLE public.reviews (
+    review_id integer NOT NULL,
+    user_id integer,
+    date timestamp without time zone NOT NULL,
+    rating integer NOT NULL,
+    review character varying(500)
+);
+
+
+ALTER TABLE public.reviews OWNER TO virginialopeznadal;
+
+--
+-- Name: reviews_review_id_seq; Type: SEQUENCE; Schema: public; Owner: virginialopeznadal
+--
+
+CREATE SEQUENCE public.reviews_review_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.reviews_review_id_seq OWNER TO virginialopeznadal;
+
+--
+-- Name: reviews_review_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: virginialopeznadal
+--
+
+ALTER SEQUENCE public.reviews_review_id_seq OWNED BY public.reviews.review_id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: virginialopeznadal
 --
 
@@ -104,6 +141,13 @@ ALTER TABLE ONLY public.favorites ALTER COLUMN query_id SET DEFAULT nextval('pub
 
 
 --
+-- Name: reviews review_id; Type: DEFAULT; Schema: public; Owner: virginialopeznadal
+--
+
+ALTER TABLE ONLY public.reviews ALTER COLUMN review_id SET DEFAULT nextval('public.reviews_review_id_seq'::regclass);
+
+
+--
 -- Name: users user_id; Type: DEFAULT; Schema: public; Owner: virginialopeznadal
 --
 
@@ -115,6 +159,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 --
 
 COPY public.favorites (query_id, user_id, cafe_id, cafe_name, image_url, cafe_street, cafe_city, cafe_state, cafe_zip) FROM stdin;
+\.
+
+
+--
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: virginialopeznadal
+--
+
+COPY public.reviews (review_id, user_id, date, rating, review) FROM stdin;
 \.
 
 
@@ -134,6 +186,13 @@ SELECT pg_catalog.setval('public.favorites_query_id_seq', 1, false);
 
 
 --
+-- Name: reviews_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: virginialopeznadal
+--
+
+SELECT pg_catalog.setval('public.reviews_review_id_seq', 1, false);
+
+
+--
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: virginialopeznadal
 --
 
@@ -146,6 +205,14 @@ SELECT pg_catalog.setval('public.users_user_id_seq', 1, false);
 
 ALTER TABLE ONLY public.favorites
     ADD CONSTRAINT favorites_pkey PRIMARY KEY (query_id);
+
+
+--
+-- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: virginialopeznadal
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT reviews_pkey PRIMARY KEY (review_id);
 
 
 --
@@ -170,6 +237,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.favorites
     ADD CONSTRAINT favorites_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- Name: reviews reviews_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: virginialopeznadal
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT reviews_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
 
 
 --
