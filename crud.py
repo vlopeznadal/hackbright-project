@@ -1,6 +1,6 @@
 """CRUD operations."""
 from flask import (request, session)
-from model import db, User, Favorites
+from model import db, User, Favorites, Reviews
 import datetime
 import requests, os
 
@@ -75,30 +75,6 @@ def get_google_cafe_info(cafe_id):
     cafe_info = cafe["result"]
     
     return cafe_info
-
-def get_fs_cafe():
-    location = {'fields': 'place_id', 'near': session["cafe_city"], 'query': session["cafe_name"], 'limit': 1,
-    'v': 20211111, 'client_id': os.environ['FS_CLIENT_ID'], 'client_secret': os.environ['FS_CLIENT_SECRET']}
-    res = requests.get('https://api.foursquare.com/v2/venues/search', 
-                    params=location)
-
-    cafe = res.json()
-
-    cafe_id = cafe['response']['venues'][0]['id']
-    
-    return cafe_id
-
-def get_fs_cafe_info(fs_id):
-    location = {'v': 20211111, 'client_id': os.environ['FS_CLIENT_ID'], 'client_secret': os.environ['FS_CLIENT_SECRET']} 
-    res = requests.get('https://api.foursquare.com/v2/venues/' + fs_id, 
-                    params=location)
-
-    cafe = res.json()
-
-    cafe_info = cafe['response']['venue']
-    
-    return cafe_info
-
 
 def get_cafes_with_session():
     location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
@@ -177,4 +153,17 @@ def get_marker_info(cafes):
         counter += 1
     
     return cafe_info
+
+def get_user_reviews():
+
+    if Reviews.query.filter(Reviews.user_id==session["user"]).first():
+        review = Reviews.query.filter(Reviews.user_id==session["user"]).first()
+        review_date = review.date.strftime('%-m/%-d/%y %-I:%M %p')
+        review_info = [review_date, review.rating, review.review]
+    else:
+        return ""
+
+    print(review_info)
+
+    return review_info
 
