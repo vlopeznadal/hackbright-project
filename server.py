@@ -2,9 +2,11 @@
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
-from model import connect_to_db, Favorites, db
+from model import connect_to_db, Favorites, Reviews, db
 
 from jinja2 import StrictUndefined
+
+from datetime import datetime
 
 import crud
 
@@ -101,10 +103,9 @@ def show_specific_cafe(cafe_id):
     cafe_id = crud.get_google_cafe()
     google_cafe = crud.get_google_cafe_info(cafe_id)
 
-    cafe_id2 = crud.get_fs_cafe()
-    fs_cafe = crud.get_fs_cafe_info(cafe_id2)
+    user_review = crud.get_user_reviews()
     
-    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe, fs_cafe=fs_cafe)
+    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe, user_review=user_review)
 
 @app.route("/favorite")
 def favorite():
@@ -160,18 +161,40 @@ def retrieve_cafe_ratings():
 
     google = crud.get_google_cafe_info(google_id)
 
-    fs_id = crud.get_fs_cafe()
-
-    fs = crud.get_fs_cafe_info(fs_id)
-
     yelp_rating = yelp["rating"]
 
     google_rating = google["rating"]
 
-    fs_rating = fs["rating"]
+    return {'yelp': yelp_rating, 'google' : google_rating}
 
-    return {'yelp': yelp_rating, 'google' : google_rating, 'fs' : fs_rating}
+@app.route("/reviewing", methods=["POST"])
+def review():
+    """review a cafe"""
 
+    rating = request.form.get("rating")
+    review = request.form.get("review")
+
+    date = datetime.now()
+
+    review = Reviews(user_id=session["user"], date=date, rating=rating, review=review)
+    db.session.add(review)
+    db.session.commit()
+
+    return redirect(request.referrer)
+
+# @app.route("/updating", methods=["POST"])
+# def review_edit():
+#     """review a cafe"""
+
+#     rating = request.form.get("rating")
+#     review = request.form.get("review")
+
+#     date = datetime.now()
+
+#     review = Reviews.query.filter(Reviews.user_id==session["user"]).first()
+#     db.session.commit()
+
+#     return redirect(request.referrer)
 
 if __name__ == '__main__':
     connect_to_db(app, "cafes")
