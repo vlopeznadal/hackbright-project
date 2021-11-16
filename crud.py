@@ -156,8 +156,8 @@ def get_marker_info(cafes):
 
 def get_user_reviews():
 
-    if Reviews.query.filter(Reviews.user_id==session["user"]).first():
-        review = Reviews.query.filter(Reviews.user_id==session["user"]).first()
+    if Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first():
+        review = Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first()
         review_date = review.date.strftime('%-m/%-d/%y %-I:%M %p')
         review_info = [review_date, review.rating, review.review]
     else:
