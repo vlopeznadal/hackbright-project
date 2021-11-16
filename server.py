@@ -1,7 +1,7 @@
 """Server for cafe information app."""
 
 from flask import (Flask, render_template, request, flash, session,
-                   redirect)
+                   redirect, url_for)
 from model import connect_to_db, Favorites, Reviews, db
 
 from jinja2 import StrictUndefined
@@ -167,34 +167,37 @@ def retrieve_cafe_ratings():
 
     return {'yelp': yelp_rating, 'google' : google_rating}
 
-@app.route("/reviewing", methods=["POST"])
+@app.route("/reviewing", methods=['POST'])
 def review():
     """review a cafe"""
 
     rating = request.form.get("rating")
-    review = request.form.get("review")
+    text = request.form.get("review")
 
     date = datetime.now()
 
-    review = Reviews(user_id=session["user"], date=date, rating=rating, review=review)
+    review = Reviews(user_id=session["user"], cafe_id=session["cafe_id"], date=date, rating=rating, review=text)
     db.session.add(review)
     db.session.commit()
 
-    return redirect(request.referrer)
+    return {'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': rating, 'review': text}
 
-# @app.route("/updating", methods=["POST"])
-# def review_edit():
-#     """review a cafe"""
+@app.route("/updating", methods=["POST"])
+def review_edit():
+    """review a cafe"""
 
-#     rating = request.form.get("rating")
-#     review = request.form.get("review")
+    rating = request.form.get("rating")
+    text = request.form.get("review")
 
-#     date = datetime.now()
+    date = datetime.now()
 
-#     review = Reviews.query.filter(Reviews.user_id==session["user"]).first()
-#     db.session.commit()
+    review = Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first()
+    review.date = date
+    review.rating = rating
+    review.review = text
+    db.session.commit()
 
-#     return redirect(request.referrer)
+    return {'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': rating, 'review': text}
 
 if __name__ == '__main__':
     connect_to_db(app, "cafes")
