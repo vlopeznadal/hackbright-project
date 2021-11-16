@@ -47,6 +47,7 @@ class Reviews(db.Model):
 
     review_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    cafe_id = db.Column(db.String(50), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     review = db.Column(db.String(500))
