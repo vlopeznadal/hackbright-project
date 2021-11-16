@@ -74,34 +74,48 @@
         <p id="favorite">Favorite <i id="heart" class="bi bi-heart"></i></p>
     </div>
     </div>
-    <div class="row justify-content-center">
-    <div class="col-12">
-      <h2>Yelp Reviews</h2>
-      {% for i in range(3) %}
-      <div class="reviewer">
-      {% if review[i]['user']['image_url'] %}
-      <img src="{{ review[i]['user']['image_url'] }}" class="reviewer_photo"/>
-      {% else %}
-      <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
-      {% endif %}
-      {{ review[i]['user']['name'] }}
-      </div>
-        <p>
-        {% for s in range(review[i]['rating']) %}
-        <i class="bi bi-star-fill"></i>
-        {% endfor %}
-        </p>
-      <p>{{ review_dates[i] }}</p>
-      <p>"{{ review[i]['text'] }}"</p>
-      <p><button><a href="{{ review[i]['url'] }}">Read the rest</a></button></p>
-      {% endfor %}
-    </div>
-    </div>
 
     <div class="row justify-content-center">
     <div class="col-12">
-      <h2>Google Reviews</h2>
-      {% for i in range(5) %}
+      <div class="accordion" id="reviewsAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Yelp Reviews
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#reviewsAccordion">
+            <div class="accordion-body">
+              {% for i in range(3) %}
+              <div class="reviewer">
+              {% if review[i]['user']['image_url'] %}
+              <img src="{{ review[i]['user']['image_url'] }}" class="reviewer_photo"/>
+              {% else %}
+              <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
+              {% endif %}
+              {{ review[i]['user']['name'] }}
+              </div>
+                <p>
+                {% for s in range(review[i]['rating']) %}
+                <i class="bi bi-star-fill"></i>
+                {% endfor %}
+                </p>
+              <p>{{ review_dates[i] }}</p>
+              <p>"{{ review[i]['text'] }}"</p>
+              <p><button><a href="{{ review[i]['url'] }}">Read the rest</a></button></p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Google Reviews
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#reviewsAccordion">
+          <div class="accordion-body">
+            {% for i in range(5) %}
       <div class="reviewer">
         {% if google_cafe['reviews'][i]['profile_photo_url'] %}
         <img src="{{ google_cafe['reviews'][i]['profile_photo_url'] }}" class="reviewer_photo"/>
@@ -118,13 +132,21 @@
       <p>{{ google_cafe['reviews'][i]['relative_time_description'] }}</p>
       <p>"{{ google_cafe['reviews'][i]['text'] }}"</p>
       {% endfor %}
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            My Review
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#reviewsAccordion">
+          <div class="accordion-body">
+            <div id="my-review">
 
-    <div class="row justify-content-center">
-      <div class="col-12">
-        <h2>My Reviews</h2>
-        {% if user_review %}
+            </div>
+            {% if user_review %}
         <div class="reviewer">
         <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
         You
@@ -136,13 +158,12 @@
           </p>
         <p>{{ user_review[0] }}</p>
         <p>"{{ user_review[2] }}"</p>
-        <button class="edit_review" class="btn btn-primary">Edit Review</button>
-        <div id="edit_form">
-
+        <button class="btn btn-primary edit-review">Edit Review</button>
+        <div id="edit-form">
         </div>
         </div>
         {% else %}
-        <form id="reviewing" action="/reviewing" method="POST">
+        <form name="reviewing" id="reviewing" action="/reviewing" method="POST">
           <div class="mb-3">
             <label for="rating" class="form-label">Rating</label>
             <input type="range" class="form-range" min="1" max="5" id="rating" name="rating"> 
@@ -151,14 +172,21 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <div id="edit-form">
+        </div>
         </div>
       </div>
       {% endif %}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
 <script src="/static/js/favorites.js" type="text/javascript"></script>
+<script src="/static/js/edit.js" type="text/javascript"></script>
 <script src="/static/js/form.js" type="text/javascript"></script>
 {% endblock %}
