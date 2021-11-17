@@ -103,3 +103,7 @@ table, tr, td {
   .edit-form {
       display: none;
   }
+
+  .edit-form {
+      padding-top: 10px;
+  }
