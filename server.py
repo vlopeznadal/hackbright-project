@@ -1,7 +1,7 @@
 """Server for cafe information app."""
 
 from flask import (Flask, render_template, request, flash, session,
-                   redirect, url_for)
+                   redirect, jsonify)
 from model import connect_to_db, Favorites, Reviews, db
 
 from jinja2 import StrictUndefined
@@ -145,12 +145,26 @@ def retrieve_coordinates():
 
     return coordinates
 
+@app.route("/coordinate")
+def retrieve_coordinate():
+    cafe = crud.get_cafe_by_id(session["cafe_id"])
+    coordinate = {'latitude' : cafe['coordinates']['latitude'], 'longitude': cafe['coordinates']['longitude']}
+
+    return coordinate
+
 @app.route("/markers")
 def retrieve_marker_info():
     cafes = crud.get_cafes_with_session()
     marker_info = crud.get_marker_info(cafes)
 
     return marker_info
+
+@app.route("/marker")
+def retrieve_marker_info_single():
+    cafe = crud.get_cafe_by_id(session["cafe_id"])
+    cafe_info = {'0': [cafe["name"], cafe["id"], cafe["location"]["address1"], cafe["location"]["city"], cafe["location"]["state"], cafe["location"]["zip_code"]]}
+
+    return cafe_info
 
 @app.route("/ratings")
 def retrieve_cafe_ratings():
@@ -180,24 +194,24 @@ def review():
     db.session.add(review)
     db.session.commit()
 
-    return {'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': rating, 'review': text}
+    return jsonify({'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': rating, 'review': text})
 
-@app.route("/updating", methods=["POST"])
+@app.route("/updating", methods=['POST'])
 def review_edit():
-    """review a cafe"""
+    """edit a cafe review"""
 
-    rating = request.form.get("rating")
-    text = request.form.get("review")
+    updated_rating = request.form.get("updatedrating")
+    updated_text = request.form.get("updatedreview")
 
-    date = datetime.now()
+    updated_date = datetime.now()
 
     review = Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first()
-    review.date = date
-    review.rating = rating
-    review.review = text
+    review.date = updated_date
+    review.rating = updated_rating
+    review.review = updated_text
     db.session.commit()
 
-    return {'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': rating, 'review': text}
+    return jsonify({'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': updated_rating, 'review': updated_text})
 
 if __name__ == '__main__':
     connect_to_db(app, "cafes")
