@@ -39,7 +39,9 @@
         {{ msg }}
         </p>
         {% endfor %}
+        <div name="search" id="search" class="d-flex flex-column min-vh-100 justify-content-center align-items-center form">
           <form id="querying" action="/cafes" method="POST">
+            <h1>Find a cafe near you!</h1>
             <div class="mb-3">
               <label for="zipcode" class="form-label">Zip Code</label>
               <input type="text" class="form-control" id="zipcode" aria-describedby="Email" name=
@@ -57,34 +59,21 @@
           </form>
         </div>
         </div>
+        </div>
       </div>
       </div>
-        {%else%}
+        {% else %}
       <div class="background">
       <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
         <div class="col-12">
-        {% for msg in get_flashed_messages() %}
-        <p class="flash-msg">
-        {{ msg }}
-        </p>
-        {% endfor %}
-          <h1>Create an account</h1>
-          <form action="/register" method="POST">
-              <div class="mb-3">
-                <label for="register-email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="register-email" aria-describedby="emailHelp" name=
-                "register-email">
-              </div>
-              <div class="mb-3">
-                <label for="register-password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="register-password" name=
-                "register-password">
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-      
+        <div name="login" id="login" class="d-flex flex-column min-vh-100 justify-content-center align-items-center form">
           <h1>Login</h1>
+          {% for msg in get_flashed_messages() %}
+          <p class="flash-msg">
+          {{ msg }}
+          </p>
+          {% endfor %}
           <form action="/login" method="POST">
               <div class="mb-3">
                 <label for="login-email" class="form-label">Email address</label>
@@ -97,7 +86,9 @@
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        {%endif %}
+            <a href="#" id="create-account">Create an account</a>
+          </div>
+        {% endif %}
         </div>
         </div>
       </div>
@@ -107,5 +98,6 @@
          <!-- jQuery -->
          <script src="https://code.jquery.com/jquery-3.6.0.js"   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="   crossorigin="anonymous"></script>
          <script src="/static/js/background.js"></script>
+         <script src="/static/js/homepage.js"></script>
     </body>
 </html>
