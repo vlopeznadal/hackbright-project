@@ -11,16 +11,21 @@
   </div>
   <div class="row">
   <div class="col-6">
-    <h1>Favorites</h1>
+    <h1 align="center">Favorites</h1>
+    {% if favorite_cafes %}
     {% for cafe in favorite_cafes %}
       <h2><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
       <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
       <p>{{ cafe.cafe_street }}</p>
       <p>{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
     {% endfor %}
+    {% else %}
+    <p align="center">You haven't favorited any cafes!</p>
+    {% endif %}
     </div>
     <div class="col-6">
-      <h1>Reviews</h1>
+      <h1 align="center">Reviews</h1>
+      {% if user_reviews %}
       {% for i in range(user_reviews[0]|length) %}
           <h2><a href="/cafes/{{ user_reviews[1][i][0] }}">{{ user_reviews[1][i][1] }}</a></h2>
         <p>
@@ -31,6 +36,9 @@
         <p>{{ user_reviews[0][i].date.strftime('%-m/%-d/%y %-I:%M %p') }}</p>
         <p>{{ user_reviews[0][i].review }}</p>
       {% endfor %}
+      {% else %}
+      <p align="center">You haven't reviewed any cafes!</p>
+      {% endif %}
   </div>
   </div>
 </div>
