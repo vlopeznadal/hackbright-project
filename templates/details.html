@@ -171,18 +171,6 @@
   
               </div>
               {% if user_review %}
-          <div class="reviewer">
-          <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
-          You
-          </div>
-            <p>
-            {% for i in range(user_review[1]) %}
-            <i class="bi bi-star-fill"></i>
-            {% endfor %}
-            </p>
-          <p>{{ user_review[0] }}</p>
-          <p>"{{ user_review[2] }}"</p>
-          <button class="btn btn-primary edit-review">Edit Review</button>
           <div class="edit-form">
             <form name="updating" id="updating" action="/updating" method="POST">
               <div class="mb-3">
