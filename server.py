@@ -103,7 +103,10 @@ def show_specific_cafe(cafe_id):
     cafe_id = crud.get_google_cafe()
     google_cafe = crud.get_google_cafe_info(cafe_id)
 
-    user_review = crud.get_user_reviews()
+    if Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first():
+        user_review = True
+    else:
+        user_review = False
     
     return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe, user_review=user_review)
 
@@ -136,7 +139,9 @@ def show_user_profile(user_id):
 
     favorite_cafes = crud.get_user_favorites(user_id)
 
-    return render_template("profile.html", user=user, favorite_cafes=favorite_cafes)
+    user_reviews = crud.get_user_reviews()
+
+    return render_template("profile.html", user=user, favorite_cafes=favorite_cafes, user_reviews=user_reviews)
 
 @app.route("/coordinates")
 def retrieve_coordinates():
@@ -180,6 +185,16 @@ def retrieve_cafe_ratings():
     google_rating = google["rating"]
 
     return {'yelp': yelp_rating, 'google' : google_rating}
+
+@app.route("/reviews", methods=['POST'])
+def retrieve_reviews():
+    """get cafe review"""
+
+    if Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first():
+        review = Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first()
+        return jsonify({'date': review.date.strftime('%-m/%-d/%y %-I:%M %p'), 'rating': review.rating, 'review': review.review})
+    else:
+        return "False"
 
 @app.route("/reviewing", methods=['POST'])
 def review():
