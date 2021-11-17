@@ -163,7 +163,5 @@ def get_user_reviews():
     else:
         return ""
 
-    print(review_info)
-
     return review_info
 
