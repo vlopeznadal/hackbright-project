@@ -68,6 +68,7 @@ ALTER SEQUENCE public.favorites_query_id_seq OWNED BY public.favorites.query_id;
 CREATE TABLE public.reviews (
     review_id integer NOT NULL,
     user_id integer,
+    cafe_id character varying(50) NOT NULL,
     date timestamp without time zone NOT NULL,
     rating integer NOT NULL,
     review character varying(500)
@@ -105,7 +106,8 @@ ALTER SEQUENCE public.reviews_review_id_seq OWNED BY public.reviews.review_id;
 CREATE TABLE public.users (
     user_id integer NOT NULL,
     email character varying(50) NOT NULL,
-    password character varying(50) NOT NULL
+    password character varying(50) NOT NULL,
+    user_image character varying(100)
 );
 
 
@@ -166,7 +168,7 @@ COPY public.favorites (query_id, user_id, cafe_id, cafe_name, image_url, cafe_st
 -- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: virginialopeznadal
 --
 
-COPY public.reviews (review_id, user_id, date, rating, review) FROM stdin;
+COPY public.reviews (review_id, user_id, cafe_id, date, rating, review) FROM stdin;
 \.
 
 
@@ -174,7 +176,7 @@ COPY public.reviews (review_id, user_id, date, rating, review) FROM stdin;
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: virginialopeznadal
 --
 
-COPY public.users (user_id, email, password) FROM stdin;
+COPY public.users (user_id, email, password, user_image) FROM stdin;
 \.
 
 
