@@ -4,6 +4,8 @@ from model import db, User, Favorites, Reviews
 import datetime
 import requests, os
 
+YELP_KEY = os.environ['YELP_KEY']
+
 def create_user(email, password):
     """Create and return a new user."""
 
@@ -27,6 +29,12 @@ def get_user_favorites(user_id):
 
     return Favorites.query.filter(Favorites.user_id == user_id).all()
 
+def get_user_image(user):
+
+    profile_pic = user.user_image
+
+    return profile_pic
+
 def get_cafes():
     zipcode = request.form.get("zipcode")
     radius = request.form.get("radius")
@@ -43,7 +51,7 @@ def get_cafes():
         return "error"
 
     location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
-    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+    headers= {'Authorization': 'Bearer ' + YELP_KEY}
 
     res = requests.get('https://api.yelp.com/v3/businesses/search',
                    params=location, headers=headers)
@@ -78,7 +86,7 @@ def get_google_cafe_info(cafe_id):
 
 def get_cafes_with_session():
     location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
-    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+    headers= {'Authorization': 'Bearer ' + YELP_KEY}
 
     res = requests.get('https://api.yelp.com/v3/businesses/search',
                    params=location, headers=headers)
@@ -90,14 +98,14 @@ def get_cafes_with_session():
     return cafes
 
 def get_cafe_by_id(cafe_id):
-    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+    headers= {'Authorization': 'Bearer ' + YELP_KEY}
     res = requests.get(f'https://api.yelp.com/v3/businesses/{cafe_id}', headers=headers)
     cafe_info = res.json()
 
     return cafe_info
 
 def get_cafe_reviews(cafe_id):
-    headers= {'Authorization': 'Bearer ' + os.environ['YELP_KEY']}
+    headers= {'Authorization': 'Bearer ' + YELP_KEY}
     res = requests.get(f'https://api.yelp.com/v3/businesses/{cafe_id}/reviews', headers=headers)
     cafe_reviews = res.json()
     reviews = cafe_reviews['reviews']
