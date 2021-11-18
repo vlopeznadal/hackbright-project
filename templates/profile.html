@@ -5,8 +5,18 @@
 {% block content %} 
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <p>temporary text</p>
+    <div class="col-6">
+      <img src="{{ profile_pic }}" class="reviewer_photo">
+    </div>
+    <div class="col-6">
+      <form action="/user-image" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="login-email" class="form-label">Profile Picture</label>
+          <input type="file" class="form-control" id="profile-pic" aria-describedby="profilePicture" name=
+          "profile-pic">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
   </div>
   <div class="row">
