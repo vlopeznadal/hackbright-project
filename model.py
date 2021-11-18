@@ -13,6 +13,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(50), nullable=False)
+    user_image = db.Column(db.String(100))
 
     favorites = db.relationship("Favorites", back_populates="user")
     reviews = db.relationship("Reviews", back_populates="user")
