@@ -3,12 +3,13 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
 from model import connect_to_db, Favorites, Reviews, db
-
 from jinja2 import StrictUndefined
-
 from datetime import datetime
+import crud, cloudinary.uploader, os
 
-import crud
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
+CLOUDINARY_NAME = "damecgv2h"
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -141,7 +142,26 @@ def show_user_profile(user_id):
 
     user_reviews = crud.get_user_reviews()
 
-    return render_template("profile.html", user=user, favorite_cafes=favorite_cafes, user_reviews=user_reviews)
+    profile_pic = crud.get_user_image(user)
+
+    return render_template("profile.html", user=user, favorite_cafes=favorite_cafes, user_reviews=user_reviews, profile_pic=profile_pic)
+
+@app.route("/user-image", methods=["POST"])
+def user_image():
+
+    user_image = request.files['profile-pic']
+
+    result = cloudinary.uploader.upload(user_image, api_key=CLOUDINARY_KEY, api_secret=CLOUDINARY_SECRET, cloud_name=CLOUDINARY_NAME)
+
+    img_url = result['secure_url']
+
+    user = crud.get_user_by_id(session['user'])
+
+    user.user_image = img_url
+    db.session.commit()
+
+    return ""
+    
 
 @app.route("/coordinates")
 def retrieve_coordinates():
