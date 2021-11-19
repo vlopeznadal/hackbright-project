@@ -1,16 +1,23 @@
 $(window).on("load", function () {
   $.post('/reviews', response => {
-    if (response != "False"){
-      $('#my-review').append('<div class="reviewer"><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/> You</div>');
-    $('#my-review').append('<p id="ratings"></p>');
-    for(let i = 1; i <= response['rating']; i++) {
-       $('#ratings').append('<i class="bi bi-star-fill"></i> ');
-    }
-    $('#my-review').append('<p>' + response['date']+'</p><p>"' + response['review'] + '"</p><button class="btn btn-primary edit-review">Edit Review</button>');
-    }
+    let review = response
+    $.post('/profile-pic', response => {
+      let profile_pic = response
+      if (profile_pic != "False") {
+        $('#my-review').append('<div class="reviewer"><img src="' + profile_pic + '" class="reviewer_photo"/> You</div>');
+      } else {
+        $('#my-review').append('<div class="reviewer"><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/> You</div>');
+      }
+      if (review != "False"){
+      $('#my-review').append('<p id="ratings"></p>');
+      for(let i = 1; i <= review['rating']; i++) {
+        $('#ratings').append('<i class="bi bi-star-fill"></i> ');
+      }
+      $('#my-review').append('<p>' + review['date']+'</p><p>"' + review['review'] + '"</p><button class="btn btn-primary edit-review">Edit Review</button>');
+      }
   });
 });
-
+});
 
 $('#reviewing').on('submit', evt => {
     evt.preventDefault();
@@ -19,9 +26,18 @@ $('#reviewing').on('submit', evt => {
         rating: $('#rating').val(),
         review: $('#review').val(),
       };
+    
+      $.post('/profile-pic', response => {
+        let profile_pic = response
+        $('#my-review').empty();
+        if (profile_pic != "False") {
+          $('#my-review').append('<div class="reviewer"><img src="' + profile_pic + '" class="reviewer_photo"/> You</div>');
+        } else {
+          $('#my-review').append('<div class="reviewer"><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/> You</div>');
+        }
+      });
   
     $.post('/reviewing', formData, response => {
-        $('#my-review').append('<div class="reviewer"><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/> You</div>');
         $('#my-review').append('<p id="ratings"></p>');
         for(let i = 1; i <= response['rating']; i++) {
            $('#ratings').append('<i class="bi bi-star-fill"></i> ');
@@ -38,10 +54,18 @@ $(document).on('submit', '#updating', function(evt) {
         updatedrating: $('#updatedrating').val(),
         updatedreview: $('#updatedreview').val(),
       };
+
+    $.post('/profile-pic', response => {
+      let profile_pic = response
+      $('#my-review').empty();
+      if (profile_pic != "False") {
+        $('#my-review').append('<div class="reviewer"><img src="' + profile_pic + '" class="reviewer_photo"/> You</div>');
+      } else {
+        $('#my-review').append('<div class="reviewer"><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/> You</div>');
+      }
+    });
   
     $.post('/updating', formData, response => {
-        $('#my-review').empty();
-        $('#my-review').append('<div class="reviewer"><img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/> You</div>');
         $('#my-review').append('<p id="ratings"></p>');
         for(let i = 1; i <= response['rating']; i++) {
            $('#ratings').append('<i class="bi bi-star-fill"></i> ');
