@@ -104,12 +104,15 @@ def show_specific_cafe(cafe_id):
     cafe_id = crud.get_google_cafe()
     google_cafe = crud.get_google_cafe_info(cafe_id)
 
+    user = crud.get_user_by_id(session['user'])
+    profile_pic = crud.get_user_image(user)
+
     if Reviews.query.filter(Reviews.user_id==session["user"], Reviews.cafe_id==session["cafe_id"]).first():
         user_review = True
     else:
         user_review = False
     
-    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe, user_review=user_review)
+    return render_template("details.html", cafe=cafe, review=reviews, review_dates=review_dates, hours=hours, google_cafe=google_cafe, user_review=user_review, profile_pic=profile_pic)
 
 @app.route("/favorite")
 def favorite():
@@ -147,7 +150,7 @@ def show_user_profile(user_id):
     return render_template("profile.html", user=user, favorite_cafes=favorite_cafes, user_reviews=user_reviews, profile_pic=profile_pic)
 
 @app.route("/user-image", methods=["POST"])
-def user_image():
+def upload_user_image():
 
     user_image = request.files['profile-pic']
 
@@ -161,6 +164,18 @@ def user_image():
     db.session.commit()
 
     return ""
+
+@app.route("/profile-pic", methods=["POST"])
+def get_profile_pic():
+
+    user = crud.get_user_by_id(session['user'])
+
+    img_url = user.user_image
+
+    if img_url:
+        return img_url
+    else:
+        return "False"
     
 
 @app.route("/coordinates")
