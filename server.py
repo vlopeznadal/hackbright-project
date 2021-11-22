@@ -152,7 +152,7 @@ def show_user_profile(user_id):
 @app.route("/user-image", methods=["POST"])
 def upload_user_image():
 
-    user_image = request.files['profile-pic']
+    user_image = request.files['profile-img']
 
     result = cloudinary.uploader.upload(user_image, api_key=CLOUDINARY_KEY, api_secret=CLOUDINARY_SECRET, cloud_name=CLOUDINARY_NAME)
 
@@ -163,7 +163,7 @@ def upload_user_image():
     user.user_image = img_url
     db.session.commit()
 
-    return ""
+    return redirect(request.referrer)
 
 @app.route("/profile-pic", methods=["POST"])
 def get_profile_pic():
