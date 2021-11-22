@@ -106,6 +106,19 @@ table, tr, td {
       padding-top: 10px;
   }
 
+  span.stars, span.stars span {
+    display: block;
+    background: url(/static/img/svgs/star.svg) 0 0 repeat-x;
+    width: 80px;
+    height: 16px;
+    background-size: 16px 16px;
+  }
+  
+  span.stars span {
+    background-position: 0 0;
+    background-image: url(/static/img/svgs/star-fill.svg);
+  }
+
   /* .form {
       background: rgba(76, 175, 80, 0.3);
       border-radius: 25px;
