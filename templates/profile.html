@@ -5,14 +5,12 @@
 {% block content %} 
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
       {% if profile_pic %}
         <img src="{{ profile_pic }}" class="reviewer_photo">
       {% else %}
         <img src="/static/img/default_reviewer.jpg" class="reviewer_photo"/>
       {% endif %}
-    </div>
-    <div class="col-6">
       <form action="/user-image" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="login-email" class="form-label">Profile Picture</label>
