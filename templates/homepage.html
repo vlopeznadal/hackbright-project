@@ -1,103 +1,74 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %} Project Title {% endblock %}</title>
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <!-- Bootstrap icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="/static/css/style.css">
-    </head>
-    <body>
-        {% if login %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <div class="navbar-nav">
-              <a class="nav-link" href="/"><i class="bi bi-search"></i></a>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="justify-content-center">
-              <a class="navbar-brand" href="/">Project Title</a>
-            </div>
-            <div class="justify-content-end" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a class="nav-link" href="/user/{{ session['user'] }}"><i class="bi bi-person-circle"></i></a>
-                <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+{% extends 'base.html' %}
+
+{% block title %} Cafe Finder {% endblock %}
+
+{% block content %}
+    <!-- Background image -->
+    <div class="background">
+        <div class="container">
+            <div class="row justify-content-center">
+            <div class="col-12">
+            <!-- Display search feature if user is logged in -->
+            {% if login %}
+              <!-- Cafe search form -->
+              <div name="search" id="search" class="d-flex flex-column min-vh-100 justify-content-center align-items-center form">
+                  <form id="querying" action="/cafes" method="POST">
+                  <h1>Find a cafe near you!</h1>
+                  <div class="mb-3">
+                      <label for="zipcode" class="form-label">Zip Code</label>
+                      <input type="text" class="form-control" id="zipcode" aria-describedby="Email" name=
+                      "zipcode">
+                      <label for="radius" class="form-label">Radius</label>
+                      <select name="radius" class="form-select" aria-label="Radius">
+                      <option value="8046" selected>5 mi</option>
+                      <option value="16093">10 mi</option>
+                      <option value="24140">15 mi</option>
+                      <option value="32186">20 mi</option>
+                      <option value="40000">25 mi</option>
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
               </div>
+              <!-- End cafe search form -->
+            <!-- Display login form if user is not logged in -->
+            {% else %}
+              <!-- Login form -->
+              <div name="login" id="login" class="d-flex flex-column min-vh-100 justify-content-center align-items-center form">
+                <h1>Login</h1>
+                <!-- Flash messages -->
+                {% for msg in get_flashed_messages() %}
+                  <p class="flash-msg">
+                  {{ msg }}
+                  </p>
+                {% endfor %}
+                <!-- End flash messages -->
+                <form action="/login" method="POST">
+                    <div class="mb-3">
+                      <label for="login-email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" name=
+                      "login-email">
+                    </div>
+                    <div class="mb-3">
+                      <label for="login-password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="login-password" name="login-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                  <!-- Button to display registration form -->
+                  <a href="#" id="create-account">Create an account</a>
+                </div>
+            {% endif %}
             </div>
-          </div>
-        </nav>
-      <div class="background">
-      <div class="container">
-          <div class="row justify-content-center">
-          <div class="col-12">
-        {% for msg in get_flashed_messages() %}
-        <p class="flash-msg">
-        {{ msg }}
-        </p>
-        {% endfor %}
-        <div name="search" id="search" class="d-flex flex-column min-vh-100 justify-content-center align-items-center form">
-          <form id="querying" action="/cafes" method="POST">
-            <h1>Find a cafe near you!</h1>
-            <div class="mb-3">
-              <label for="zipcode" class="form-label">Zip Code</label>
-              <input type="text" class="form-control" id="zipcode" aria-describedby="Email" name=
-              "zipcode">
-              <label for="radius" class="form-label">Radius</label>
-              <select name="radius" class="form-select" aria-label="Radius">
-                <option value="8046" selected>5 mi</option>
-                <option value="16093">10 mi</option>
-                <option value="24140">15 mi</option>
-                <option value="32186">20 mi</option>
-                <option value="40000">25 mi</option>
-              </select>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
         </div>
-        </div>
-        </div>
-      </div>
-      </div>
-        {% else %}
-      <div class="background">
-      <div class="container">
-        <div class="row">
-        <div class="col-12">
-        <div name="login" id="login" class="d-flex flex-column min-vh-100 justify-content-center align-items-center form">
-          <h1>Login</h1>
-          {% for msg in get_flashed_messages() %}
-          <p class="flash-msg">
-          {{ msg }}
-          </p>
-          {% endfor %}
-          <form action="/login" method="POST">
-              <div class="mb-3">
-                <label for="login-email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" name=
-                "login-email">
-              </div>
-              <div class="mb-3">
-                <label for="login-password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="login-password" name="login-password">
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <a href="#" id="create-account">Create an account</a>
-          </div>
-        {% endif %}
-        </div>
-        </div>
-      </div>
-      </div>
-         <!-- JavaScript Bundle with Popper -->
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-         <!-- jQuery -->
-         <script src="https://code.jquery.com/jquery-3.6.0.js"   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="   crossorigin="anonymous"></script>
-         <script src="/static/js/background.js"></script>
-         <script src="/static/js/homepage.js"></script>
-    </body>
-</html>
+    </div>
+    <!-- End background image -->
+{% endblock %}
+
+{% block scripts %} 
+  <!-- Select random background to display -->
+  <script src="/static/js/background.js"></script>
+  <!-- Switch between login form and registration form on link click-->
+  <script src="/static/js/homepage.js"></script>
+{% endblock %}
