@@ -1,28 +1,38 @@
 {% extends 'base.html' %}
 
-{% block title %} Cafe Finder - Results{% endblock %}
+{% block title %} Cafe Finder - Results {% endblock %}
 
 {% block content %} 
 <div class="container">
-<div class="row">
-<div class="col-5" id="info">
-{% for cafe in cafes %}
-  <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
-  <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
-  <p>{{ cafe.location.address1 }}</p>
-  <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
-  <p>{{ cafe.display_phone }}</p>
-{% endfor %}
-</div>
-<div class="col-7" id="map"></div>
-</div>
+  <div class="row">
+
+  <!-- Column #1: Listed Results -->
+  <div class="col-5" id="info">
+    <!-- For each cafe in the returned results-->
+    {% for cafe in cafes %}
+      <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
+      <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
+      <p>{{ cafe.location.address1 }}</p>
+      <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
+      <p>{{ cafe.display_phone }}</p>
+    {% endfor %}
+  </div>
+  <!-- End of column #1-->
+
+  <!-- Column #2: Google Map -->
+  <!-- DIV to display map in with JS-->
+  <div class="col-7" id="map"></div>
+  </div>
+
 </div>
 {% endblock %}
 
 {% block scripts %} 
-<script src="/static/js/map.js"></script>
-<script
-  async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=bf545e16b59f18e2&callback=initMap">
-</script>
+  <!-- Initialize results map and create map markers with provided coordinates -->
+  <script src="/static/js/results-map.js"></script>
+  <!-- Create Google map with API key, map ID, and function -->
+  <script
+    async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=bf545e16b59f18e2&callback=initMap">
+  </script>
 {% endblock %}
