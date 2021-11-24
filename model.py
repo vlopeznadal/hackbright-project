@@ -58,6 +58,21 @@ class Reviews(db.Model):
     def __repr__(self):
         return f"<Reviews review_id={self.review_id} user_id={self.user_id} date={self.date}>"
 
+def example_data():
+    """Create some sample data."""
+
+    # In case this is run more than once, empty out existing data
+    User.query.delete()
+
+    # Add sample users
+    leonard = User(email='leonard@test.com', password="leo123")
+    liz = User(email='liz@test.com', password="liz123")
+    maggie = User(email='maggie@test.com', password="mag123")
+    nadine = User(email='nadine@test.com', password="nad123")
+
+    db.session.add_all([leonard, liz, maggie, nadine])
+    db.session.commit()
+
 def connect_to_db(app, db_name):
     app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{db_name}"
     app.config["SQLALCHEMY_ECHO"] = True
