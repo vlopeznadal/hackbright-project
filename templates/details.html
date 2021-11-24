@@ -268,19 +268,24 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Initialize cafe map and create map marker with provided coordinates -->
-<script src="/static/js/cafe-map.js"></script>
-<!-- Create Google map with API key, map ID, and function -->
-<script
-  async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=b3a38d6b637efa469&callback=initMap">
-</script>
-<!-- Save state of favorite button | Add favorited cafe to DB -->
-<script src="/static/js/favorites.js" type="text/javascript"></script>
-<!-- Show reviews | Show/hide review editing form -->
-<script src="/static/js/form.js" type="text/javascript"></script>
-<!-- Display ratings stars -->
-<script src="/static/js/ratings.js" type="text/javascript"></script>
-<!-- Show number selected on ratings form slider -->
-<script src="/static/js/slider.js" type="text/javascript"></script>
+  <!-- Initialize cafe map and create map marker with provided coordinates -->
+  <script src="/static/js/cafe-map.js"></script>
+
+  <!-- Create Google map with API key, map ID, and function -->
+  <script
+    async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=b3a38d6b637efa469&callback=initMap">
+  </script>
+
+  <!-- Save state of favorite button | Add favorited cafe to DB -->
+  <script src="/static/js/favorites.js" type="text/javascript"></script>
+
+  <!-- Show reviews | Show/hide review editing form -->
+  <script src="/static/js/form.js" type="text/javascript"></script>
+
+  <!-- Display ratings stars -->
+  <script src="/static/js/ratings.js" type="text/javascript"></script>
+  
+  <!-- Show number selected on ratings form slider -->
+  <script src="/static/js/slider.js" type="text/javascript"></script>
 {% endblock %}
