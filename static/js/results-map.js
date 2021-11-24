@@ -33,6 +33,7 @@ function initMap() {
                         scaledSize: new google.maps.Size(38, 31)
                     }
                 });
+                
                 // Retrieving dictionary of cafes' information
                 $.get('/results-markers', response => {
 
