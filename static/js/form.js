@@ -1,3 +1,6 @@
+/* Displaying reviews on page load 
+Grabbing the user's profile pic to display with reviews */
+
 // Once HTML document has been loaded
 $(document).ready(function(){
 
@@ -46,11 +49,39 @@ $(document).ready(function(){
   });
 });
 
+
+/* Adding review to DB on review form submission
+Validates that review contains text before populating DB 
+Grabbing the user's profile pic to display with reviews */
+
 // Listen for the submission of the review form
-$('#reviewing').on('submit', evt => {
+$("#reviewing").submit(function(evt) {
 
   // Prevent default action of the event from triggering
   evt.preventDefault();
+  })  
+
+  // Form validation
+  .validate({
+
+  // Add styling to error messages 
+  errorClass: "error",
+
+  // Checking that the user input review text
+  rules:{
+    review:{required: true, maxlength: 500},
+  },
+  
+  // Error messages to display for validation
+  messages: {
+    review:{maxlength: "Review can only be up to 500 characters",
+      required: "Review must contain text"
+      },
+
+  },
+
+  // Once requirements have been met
+  submitHandler: function(form) {
 
   // Create a dictionary with the values of the rating and review inputs of the form
   const formData = {
@@ -99,13 +130,43 @@ $('#reviewing').on('submit', evt => {
       // Hide review form
       $('#reviewing').hide();
   });
-});
+ 		
+  }
+  });
+
+
+/* Updating review in DB on edit form submission
+Validates that review contains text before updating DB 
+Grabbing the user's profile pic to display with reviews */
 
 // Listen for the submission of the edit form
-$(document).on('submit', '#updating', function(evt) { 
+$("#updating").submit(function(evt) {
 
   // Prevent default action of the event from triggering
   evt.preventDefault();
+  })
+
+  // Form validation
+  .validate({
+
+  // Add styling to error messages 
+  errorClass: "error",
+
+  // Checking that the user input review text
+  rules:{
+    updatedreview:{required: true, maxlength: 500},
+  },
+  
+  // Error messages to display for validation
+  messages: {
+    updatedreview:{maxlength: "Review can only be up to 500 characters",
+      required: "Review must contain text"
+      },
+
+  },
+
+  // Once requirements have been met
+  submitHandler: function(form){ 
 
   // Create a dictionary with the values of the rating and review inputs of the form
   const formData = {
@@ -162,8 +223,13 @@ $(document).on('submit', '#updating', function(evt) {
       // Display updated range value once form is emptied (default value of 3)
       $('.range-value').html(" " + current_value);
   });
+  }
 });
 
+
+/* Shows or hides edit form on edit review button click
+Scrolls to bottom of page when edit form is shown 
+Clears out form and updates slider value when edit form is hidden */
 
 // Listening for click of edit review button
 $(document).on('click', '.edit-review', function() { 
@@ -179,7 +245,6 @@ $(document).on('click', '.edit-review', function() {
 
     // Scroll to bottom of page to show opening of edit form
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-    // return false;
   }
   // If the edit form is showing
   else if ($('#updating').is(":visible")) {
