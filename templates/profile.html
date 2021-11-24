@@ -3,16 +3,24 @@
 {% block title %} Cafe Finder - Profile{% endblock %}
 
 {% block content %} 
+<!-- Beginning of container -->
 <div class="container">
+  <!-- Begin Row #1 -->
   <div class="row">
+
+    <!-- Column #1: Profile Picture/Email Display -->
     <div class="col-6 p-4">
       <span id="profile-pic-display">
       </span>
       <span>Email: {{ user.email }} </span>
     </div>
+    <!-- End of Column #1 -->
+
+    <!-- Column #2: Update Profile Picture -->
     <div class="col-6 p-4">
       <form action="/user-image" method="POST" enctype="multipart/form-data" id="profile-pic-form" name="profile-pic-form">
         <div class="mb-3">
+          <!-- File upload -->
           <label for="login-email" class="form-label">Update Profile Picture</label>
           <input type="file" class="form-control" id="profile-img" aria-describedby="profilePicture" name=
           "profile-img">
@@ -20,42 +28,61 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    <!-- End of Column #2 -->
   </div>
+  <!-- End of Row #1 -->
+
+  <!-- Begin Row # 2-->
   <div class="row">
-  <div class="col-6">
-    <h1 align="center">Favorites</h1>
-    {% if favorite_cafes %}
-    {% for cafe in favorite_cafes %}
-      <h2><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
-      <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
-      <p>{{ cafe.cafe_street }}</p>
-      <p>{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
-    {% endfor %}
-    {% else %}
-    <p align="center">You haven't favorited any cafes!</p>
-    {% endif %}
+
+    <!-- Column #1: Favorite Cafes -->
+    <div class="col-6">
+      <h1 align="center">Favorites</h1>
+
+      <!-- If user has favorited a cafe -->
+      {% if favorite_cafes %}
+        {% for cafe in favorite_cafes %}
+          <h2><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
+          <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
+          <p>{{ cafe.cafe_street }}</p>
+          <p>{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
+        {% endfor %}
+
+      <!-- If user has not favorited a cafe -->
+      {% else %}
+        <p align="center">You haven't favorited any cafes!</p>
+      {% endif %}
     </div>
+    <!-- End of Column #1 -->
+
+    <!-- Column #2: Reviewed Cafes -->
     <div class="col-6">
       <h1 align="center">Reviews</h1>
+      <!-- If user has reviewed a cafe -->
       {% if user_reviews %}
-      {% for i in range(user_reviews[0]|length) %}
+        {% for i in range(user_reviews[0]|length) %}
           <h2><a href="/cafes/{{ user_reviews[1][i][0] }}">{{ user_reviews[1][i][1] }}</a></h2>
-        <p>
-        {% for i in range(user_reviews[0][i].rating) %}
-        <i class="bi bi-star-fill"></i> 
+          <p>
+          {% for i in range(user_reviews[0][i].rating) %}
+            <i class="bi bi-star-fill"></i> 
+          {% endfor %}
+          </p>
+          <p>{{ user_reviews[0][i].date.strftime('%-m/%-d/%y %-I:%M %p') }}</p>
+          <p>{{ user_reviews[0][i].review }}</p>
         {% endfor %}
-        </p>
-        <p>{{ user_reviews[0][i].date.strftime('%-m/%-d/%y %-I:%M %p') }}</p>
-        <p>{{ user_reviews[0][i].review }}</p>
-      {% endfor %}
+      <!-- If user has not reviewed any cafes -->
       {% else %}
-      <p align="center">You haven't reviewed any cafes!</p>
+        <p align="center">You haven't reviewed any cafes!</p>
       {% endif %}
+    </div>
+    <!-- End of Column #2 -->
   </div>
-  </div>
+  <!-- End of Row #2-->
 </div>
+<!-- End of Container -->
 {% endblock %}
 
 {% block scripts %}
+<!-- Displays user's profile picture on page -->
 <script src="/static/js/profile-pic.js" type="text/javascript"></script>
 {% endblock %}
