@@ -1,6 +1,8 @@
 from unittest import TestCase
+
+from flask.helpers import flash
 from server import app
-from model import connect_to_db, db, example_data
+from model import connect_to_db, db, example_data, User
 from flask import session
 
 class FlaskTestsBasic(TestCase):
@@ -25,8 +27,8 @@ class FlaskTestsBasic(TestCase):
         result = self.client.get('/logout', follow_redirects = True)
         self.assertIn(b"Login", result.data)
 
-class FlaskTestsDatabase(TestCase):
-    """Flask tests that use the database."""
+class FlaskTestsLoggedIn(TestCase):
+    """Flask tests with user logged in to session."""
 
     def setUp(self):
         """Stuff to do before every test."""
@@ -46,13 +48,6 @@ class FlaskTestsDatabase(TestCase):
             with c.session_transaction() as sess:
                 sess['user'] = 1
 
-    def tearDown(self):
-        """Do at end of every test."""
-
-        db.session.remove()
-        db.drop_all()
-        db.engine.dispose()
-
     def test_login(self):
         """Test login page."""
 
@@ -60,6 +55,15 @@ class FlaskTestsDatabase(TestCase):
                                   data={"email": "leonard@test.com", "password": "leo123"},
                                   follow_redirects=True)
         self.assertIn(b"Zip Code", result.data)
+
+    def test_cafes(self):
+        """Test results page."""
+
+        result = self.client.post("/cafes",
+                                  data={"zipcode": 55404},
+                                  follow_redirects=True)
+        self.assertIn(b"Alma", result.data)
+
 
 if __name__ == "__main__":
     import unittest
