@@ -98,6 +98,7 @@ def logout():
 
     # Remove user ID from session
     session.pop('user', None)
+    flash("You've been logged out.")
 
     # Sends user back to homepage with login form
     return redirect("/")
