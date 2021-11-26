@@ -3,11 +3,11 @@
 {% block title %} Cafetastic - Results {% endblock %}
 
 {% block content %} 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
 
   <!-- Column #1: Listed Results -->
-  <div class="col-5" id="info">
+  <div class="col-6 d-flex flex-column min-vh-100 justify-content-center align-items-center" id="info">
     <!-- For each cafe in the returned results-->
     {% for cafe in cafes %}
       <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
@@ -21,10 +21,12 @@
 
   <!-- Column #2: Google Map -->
   <!-- DIV to display map in with JS-->
-  <div class="col-7" id="map"></div>
+  <div class="col-6" id="map">
+
   </div>
   <!-- End of column #2 -->
 
+  </div>
 </div>
 {% endblock %}
 
