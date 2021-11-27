@@ -74,6 +74,11 @@ def create_account():
     # Checks to see if their is already a user in DB with provided email
     user = crud.get_user(email)
 
+    # Ensures an email and password is provided
+    if not email or not password:
+        flash("An email and password required for registration.")
+        return redirect(request.referrer)
+
     # User already exists
     if user:
         flash("An account with this email already exists.")
@@ -83,11 +88,6 @@ def create_account():
         # Enters information into DB
         crud.create_user(email, password)
         flash("Your account was created! Log in now.")
-
-    # Ensures an email and password is provided
-    if not email or not password:
-        flash("An email and password required for registration.")
-        return redirect(request.referrer)
 
     # Sends user back to homepage to login to account
     return redirect ("/")
