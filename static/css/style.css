@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    font-family: 'Karla', sans-serif;
 }
 
 #favorite, #heart {
@@ -19,20 +20,28 @@ body, html {
 }
 
 .cafe_photo {
+    width: 400px;
+    height: 300px;
+    border-radius: 30px;
+}
+
+.fav-cafe-photo {
     width: 500px;
     height: 400px;
+    border-radius: 30px;
+}
+
+.fav-cafe {
+    padding: 20px;
 }
 
 h1 {
-    color: black;
-}
-
-h2 {
-    color: black;
+    color: #2E3A44;
+    font-family: 'Lora', serif;
 }
 
 #map {
-    height: 100vh;
+    height: 50vh;
 }
 
 #cafe_map {
@@ -68,8 +77,6 @@ table, tr, td {
 
 .background {
     background-size: cover;
-    height: 100%;
-    width: 100%;
 }
 
 .chart rect:first-of-type {
@@ -114,9 +121,85 @@ table, tr, td {
     background-image: url(/static/img/svgs/star-fill.svg);
   }
 
-  /* .form {
-      background: rgba(76, 175, 80, 0.3);
+  .logo {
+    width: 128px;
+    height: 128px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-name {
+    font-family: 'Outfit', sans-serif;
+    color: #35251C;
+  }
+
+  .navbar {
+    background-color: #C5A662;
+    font-size: 20px;
+  }
+
+  .btn-primary {
+    color: black;
+    border-color: #AE724C;
+    background-color: #AE724C;
+  }
+
+  a {
+      text-decoration: none;
+      color: #AE724C;
+  }
+
+  .transparent-box {
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 25px;
-      padding: 20px; 
-      height: 150px; 
-  } */
+      padding: 100px; 
+  }
+
+  .form-box {
+    width: 400px;
+  }
+
+  footer { 
+      vertical-align: top
+}
+
+.cafe-result {
+    background: #FFFFFF;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.cafe-address {
+    margin-bottom: 0px;
+}
+
+.button-text {
+    color: black;
+}
+
+#my-review, .review {
+    padding: 20px;
+    margin: 1rem 0 1rem 0;
+    background-color: #efefef;
+    border-radius: 30px;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #C5A662;
+    color: black;
+}
+
+.accordion-button:after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000000'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+  }
+
+/* #cafe-results {
+    overflow: hidden;
+    height: 100%;
+    display: flex; 
+    flex-direction: column;
+
+} */
