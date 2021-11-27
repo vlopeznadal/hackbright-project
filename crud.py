@@ -109,10 +109,10 @@ def get_cafes():
         return "error"
 
     # Parameters for Yelp API request, including provided zipcode and radius
-    location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
+    location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 6}
     headers= {'Authorization': 'Bearer ' + YELP_KEY}
 
-    # Yelp API request searching for cafes; Returning a limit of 5
+    # Yelp API request searching for cafes; Returning a limit of 6
     res = requests.get('https://api.yelp.com/v3/businesses/search',
                    params=location, headers=headers)
 
@@ -150,10 +150,10 @@ def get_cafes_with_session():
     Returns cafe results from API call."""
 
     # Parameters for Yelp API request, including zipcode and radius from session
-    location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 5}
+    location = {'categories': 'cafes', 'location': session["zipcode"], 'radius': session["radius"], 'limit': 6}
     headers= {'Authorization': 'Bearer ' + YELP_KEY}
 
-    # Yelp API request searching for cafes; Returning a limit of 5
+    # Yelp API request searching for cafes; Returning a limit of 6
     res = requests.get('https://api.yelp.com/v3/businesses/search',
                    params=location, headers=headers)
 
@@ -333,8 +333,7 @@ def get_marker_info(cafes):
 
         # Create an item in the dictionary where key is a number starting at 0 and
         # value is a list of the cafe's name, ID, and location (address, city, state, zip code)
-        cafe_info[counter]= cafe["name"], cafe["id"], cafe["location"]["address1"], cafe["location"]["city"], 
-        cafe["location"]["state"], cafe["location"]["zip_code"]
+        cafe_info[counter]= cafe["name"], cafe["id"], cafe["location"]["address1"], cafe["location"]["city"], cafe["location"]["state"], cafe["location"]["zip_code"]
 
         # Increase counter by 1
         counter += 1
