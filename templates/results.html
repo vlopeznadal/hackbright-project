@@ -3,30 +3,57 @@
 {% block title %} Cafetastic - Results {% endblock %}
 
 {% block content %} 
-<div class="container-fluid">
+<!-- Display background image -->
+<div class="background">
+<div class="container-fluid" id="cafe-results">
   <div class="row">
+    <!-- Column #1: Google Map -->
+    <!-- DIV to display map in with JS-->
+    <div class="col-12" id="map">
 
-  <!-- Column #1: Listed Results -->
-  <div class="col-6 d-flex flex-column min-vh-100 justify-content-center align-items-center" id="info">
+    </div>
+    <!-- End of column #1-->
+
+  </div>
+  <div class="row">
+  <!-- Columns #2-4: Listed Results -->
     <!-- For each cafe in the returned results-->
-    {% for cafe in cafes %}
-      <h2><a href="/cafes/{{ cafe.id }}">{{ cafe.name }}</a></h2>
-      <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
-      <p>{{ cafe.location.address1 }}</p>
-      <p>{{ cafe.location.city }}, {{ cafe.location.state }} {{ cafe.location.zip_code }}</p>
-      <p>{{ cafe.display_phone }}</p>
+    {% for i in range(0, cafes|length) %}
+      <!-- If the item begins the column -->
+      {% if i == 0 or i == 2 or i == 4 %}
+        <!-- DIV for each cafe in column -->
+        <div class="col-4 d-flex flex-column min-vh-100 justify-content-center align-items-center" id="info">
+          <div class="cafe-result text-center">
+            <p><img class="cafe_photo" src="{{ cafes[i].image_url }}" /></p>
+            <h1><a href="/cafes/{{ cafes[i].id }}">{{ cafes[i].name }}</a></h1>
+            <p class="cafe-address">{{ cafes[i].location.address1 }}</p>
+            <p class="cafe-address">{{ cafes[i].location.city }}, {{ cafes[i].location.state }} {{ cafes[i].location.zip_code }}</p>
+            <p class="cafe-address">{{ cafes[i].display_phone }}</p>
+          </div>
+      <!-- If the item doesn't begin the column -->
+      {% else %}
+          <!-- DIV inside the column -->
+          <div class="cafe-result text-center">
+            <p><img class="cafe_photo" src="{{ cafes[i].image_url }}" /></p>
+            <h1><a href="/cafes/{{ cafes[i].id }}">{{ cafes[i].name }}</a></h1>
+            <p class="cafe-address">{{ cafes[i].location.address1 }}</p>
+            <p class="cafe-address">{{ cafes[i].location.city }}, {{ cafes[i].location.state }} {{ cafes[i].location.zip_code }}</p>
+            <p class="cafe-address">{{ cafes[i].display_phone }}</p>
+          </div>
+      {% endif %}
+      
+      <!-- If the item ends the column -->
+      {% if i == 1 or i == 3 or i == 5 %}
+        <!-- Close the column DIV -->
+        </div>
+      {% endif %}
+
     {% endfor %}
+    <!-- End of columns #2-4 -->
   </div>
-  <!-- End of column #1-->
-
-  <!-- Column #2: Google Map -->
-  <!-- DIV to display map in with JS-->
-  <div class="col-6" id="map">
-
   </div>
-  <!-- End of column #2 -->
 
-  </div>
+</div>
 </div>
 {% endblock %}
 
@@ -38,4 +65,6 @@
     async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2MwTqduMNK_g-86AK2g72L5NOsWAMBk0&map_ids=bf545e16b59f18e2&callback=initMap">
   </script>
+  <!-- Select random background to display -->
+  <script src="/static/js/background.js"></script>
 {% endblock %}

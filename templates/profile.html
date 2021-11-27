@@ -9,7 +9,7 @@
   <div class="row">
 
     <!-- Column #1: Profile Picture/Email Display -->
-    <div class="col-6 p-4">
+    <div class="col-6 p-4 text-center">
       <span id="profile-pic-display">
       </span>
       <span>Email: {{ user.email }} </span>
@@ -36,28 +36,30 @@
   <div class="row">
 
     <!-- Column #1: Favorite Cafes -->
-    <div class="col-6">
-      <h1 align="center">Favorites</h1>
+    <div class="col-6 d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <h1 class="text-center">Favorites</h1>
 
       <!-- If user has favorited a cafe -->
       {% if favorite_cafes %}
         {% for cafe in favorite_cafes %}
+        <div class="fav-cafe text-center">
           <h2><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
-          <p><img class="cafe_photo" src="{{ cafe.image_url }}" /></p>
-          <p>{{ cafe.cafe_street }}</p>
-          <p>{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
+          <p><img class="fav-cafe-photo" src="{{ cafe.image_url }}" /></p>
+          <p class="cafe-address">{{ cafe.cafe_street }}</p>
+          <p class="cafe-address">{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
+        </div>
         {% endfor %}
 
       <!-- If user has not favorited a cafe -->
       {% else %}
-        <p align="center">You haven't favorited any cafes!</p>
+        <p class="text-center">You haven't favorited any cafes!</p>
       {% endif %}
     </div>
     <!-- End of Column #1 -->
 
     <!-- Column #2: Reviewed Cafes -->
     <div class="col-6">
-      <h1 align="center">Reviews</h1>
+      <h1 class="text-center">Reviews</h1>
       <!-- If user has reviewed a cafe -->
       {% if user_reviews %}
         {% for i in range(user_reviews[0]|length) %}
@@ -72,7 +74,7 @@
         {% endfor %}
       <!-- If user has not reviewed any cafes -->
       {% else %}
-        <p align="center">You haven't reviewed any cafes!</p>
+        <p class="text-center">You haven't reviewed any cafes!</p>
       {% endif %}
     </div>
     <!-- End of Column #2 -->

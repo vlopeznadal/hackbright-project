@@ -131,6 +131,7 @@
               <div class="accordion-body">
                 <!-- For each review -->
                 {% for i in range(3) %}
+                <div class="review">
                   <div class="reviewer">
                     {% if yelp_reviews[i]['user']['image_url'] %}
                       <img src="{{ yelp_reviews[i]['user']['image_url'] }}" class="reviewer_photo"/>
@@ -147,7 +148,8 @@
                   </p>
                   <p>{{ yelp_review_dates[i] }}</p>
                   <p>"{{ yelp_reviews[i]['text'] }}"</p>
-                  <p><button><a href="{{ yelp_reviews[i]['url'] }}">Read the rest</a></button></p>
+                  <p><button class="btn btn-primary"><a href="{{ yelp_reviews[i]['url'] }}" class="button-text">Read the rest</a></button></p>
+                </div>
                 {% endfor %}
               </div>
             </div>
@@ -166,6 +168,7 @@
             <div class="accordion-body">
               <!-- For each review -->
               {% for i in range(5) %}
+              <div class="review">
                 <div class="reviewer">
                   {% if google_reviews[i]['profile_photo_url'] %}
                     <img src="{{ google_reviews[i]['profile_photo_url'] }}" class="reviewer_photo"/>
@@ -182,6 +185,7 @@
                 </p>
                 <p>{{ google_reviews[i]['relative_time_description'] }}</p>
                 <p>"{{ google_reviews[i]['text'] }}"</p>
+              </div>
               {% endfor %}
             </div>
           </div>
@@ -201,7 +205,7 @@
 
               <!-- DIV for review display -->
               <div id="my-review">
-  
+                
               </div>
               <!-- End DIV for review display -->
 
@@ -228,7 +232,7 @@
               {% else %}
 
               <!-- Review form -->
-              <form name="reviewing" id="reviewing" action="/reviewing" method="POST">
+              <form name="reviewing" id="reviewing" action="/reviewing" method="POST" class="pt-4">
                 <div class="mb-3">
                   <!-- Rating slider -->
                   <label for="rating" class="form-label">Rating:</label><span class="range-value"></span>
