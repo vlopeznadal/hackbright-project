@@ -11,13 +11,13 @@ Cafetastic makes finding an enjoyable cafe near you easier. This app provides a 
 * [Attributions](#attributions)
 * [About Me](#about-me)
 
-## <a name="tech-stack"></a>Tech Stack
+## <a name="tech-stack"></a>Tech Stack 🖥
 
 **Backend**:  Flask, PostgreSQL, Python, SQLAlchemy <br/>
 **Frontend**:  AJAX, Bootstrap, CSS, HTML, Jinja2, JavaScript, jQuery <br/>
 **APIs**:  Cloudinary, Google Maps JavaScript, Google Places, Yelp
 
-## <a name="features"></a>Features
+## <a name="features"></a>Features 🔎
 
 Register for an account and login to use any app features.
 
@@ -36,10 +36,10 @@ Upload your own profile picture.
 View your favorited and reviewed cafes.
 
 
-## <a name="installation"></a>Installation
+## <a name="installation"></a>Set Up 🛠
 
-Install [Python](https://www.python.org/downloads/)
-Install [PostgreSQL](https://www.postgresql.org/download/)
+-- Install [Python](https://www.python.org/downloads/) <br/>
+-- Install [PostgreSQL](https://www.postgresql.org/download/)
 
 Clone repository:
 ```
@@ -56,7 +56,7 @@ Install the dependencies:
 ```
 pip3 install -r requirements.txt
 ```
-Sign up to use the [Cloudinary API](https://cloudinary.com), [Google Places API](https://developers.google.com/maps), [Google Maps Javascript API](https://developers.google.com/maps), and [Yelp API](https://www.yelp.com/developers).
+-- Sign up to use the [Cloudinary API](https://cloudinary.com), [Google Places API](https://developers.google.com/maps), [Google Maps Javascript API](https://developers.google.com/maps), and [Yelp API](https://www.yelp.com/developers).
 
 Save your Yelp and Cloudinary API keys to a file `secrets.sh`. The file should resemble this:
 ```
@@ -121,9 +121,9 @@ Run the app:
 python3 server.py
 ```
 
-Go to 'localhost:5000' in your browser.
+-- Go to 'localhost:5000' in your browser.
 
-## <a name="attributions"></a>Attributions
+## <a name="attributions"></a>Attributions 🙏🏻
 
 **Icon used as logo**: <br/>
 `logo.png` and `static/img/svgs/logo.svg`: Icon by [constantino co](https://freeicons.io/profile/3156) on [freeicons.io](https://freeicons.io) - [Direct link](https://freeicons.io/download-free-35-nz-coffee-icons-for-commercial-use/top-view-coffee-cup-icon-icon-34767#)
@@ -138,5 +138,5 @@ Go to 'localhost:5000' in your browser.
 `static/img/background/background-4.jpg`: Photo by [RR Abrot](https://unsplash.com/@rr_abrot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/pNIgH0y3upM) <br/>
 `static/img/background/background-5.jpg`: Photo by [@shawnanggg](https://unsplash.com/@shawnanggg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/nmpW_WwwVSc)
   
-## <a name="about-me"></a>About Me
+## <a name="about-me"></a>About Me 👩🏻‍💻
 Virginia Lopez Nadal is a software engineer in Minneapolis, MN. Find her on [LinkedIn](https://www.linkedin.com/in/vlopeznadal).
