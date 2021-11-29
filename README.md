@@ -38,8 +38,8 @@ View your favorited and reviewed cafes.
 
 ## <a name="installation"></a>Set Up 🛠
 
--- Install [Python](https://www.python.org/downloads/) <br/>
--- Install [PostgreSQL](https://www.postgresql.org/download/)
+* Install [Python](https://www.python.org/downloads/) <br/>
+* Install [PostgreSQL](https://www.postgresql.org/download/)
 
 Clone repository:
 ```
@@ -56,7 +56,7 @@ Install the dependencies:
 ```
 pip3 install -r requirements.txt
 ```
--- Sign up to use the [Cloudinary API](https://cloudinary.com), [Google Places API](https://developers.google.com/maps), [Google Maps Javascript API](https://developers.google.com/maps), and [Yelp API](https://www.yelp.com/developers).
+* Sign up to use the [Cloudinary API](https://cloudinary.com), [Google Places API](https://developers.google.com/maps), [Google Maps Javascript API](https://developers.google.com/maps), and [Yelp API](https://www.yelp.com/developers).
 
 Save your Yelp and Cloudinary API keys to a file `secrets.sh`. The file should resemble this:
 ```
@@ -121,7 +121,7 @@ Run the app:
 python3 server.py
 ```
 
--- Go to 'localhost:5000' in your browser.
+* Go to 'localhost:5000' in your browser. 
 
 ## <a name="attributions"></a>Attributions 🙏🏻
 
@@ -134,7 +134,7 @@ python3 server.py
 **Background Images**: <br/>
 `static/img/background/background-1.jpg`: Photo by [Petr Sevcovic](https://unsplash.com/@sevcovic23?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/qE1jxYXiwOA) <br/>
 `static/img/background/background-2.jpg`: Photo by [daan evers](https://unsplash.com/@daanelise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/tKN1WXrzQ3s) <br/>
-`static/img/background/background-3.jpg`: Photo by [Qiming Chen](https://unsplash.com/@acming92?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - Direct Link](https://unsplash.com/photos/lzCH2_8qRH8) <br/>
+`static/img/background/background-3.jpg`: Photo by [Qiming Chen](https://unsplash.com/@acming92?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/lzCH2_8qRH8) <br/>
 `static/img/background/background-4.jpg`: Photo by [RR Abrot](https://unsplash.com/@rr_abrot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/pNIgH0y3upM) <br/>
 `static/img/background/background-5.jpg`: Photo by [@shawnanggg](https://unsplash.com/@shawnanggg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/nmpW_WwwVSc)
   
