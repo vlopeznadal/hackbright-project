@@ -2,7 +2,7 @@
 
 [![Build Status](https://app.travis-ci.com/vlopeznadal/hackbright-project.svg?branch=main)](https://app.travis-ci.com/vlopeznadal/hackbright-project)
 
-Cafetastic makes finding an enjoyable cafe near you easier. This app provides a way to see reviews and ratings from Yelp and Google in one place. Users are also able to write up their own reviews and even favorite cafes for easy view later on.
+Cafetastic makes finding an enjoyable cafe near you easier. This app provides a way to see reviews and ratings from Yelp and Google in one place. Users are also able to write up their own reviews and favorite cafes for quick view on their profile page.
 
 ## Table of Contents ☕️
 * [Tech Stack](#tech-stack)
@@ -38,8 +38,8 @@ View your favorited and reviewed cafes.
 
 ## <a name="installation"></a>Installation
 
-- Install [Python](https://www.python.org/downloads/)
-- Install [PostgreSQL](https://www.postgresql.org/download/)
+Install [Python](https://www.python.org/downloads/)
+Install [PostgreSQL](https://www.postgresql.org/download/)
 
 Clone repository:
 ```
@@ -56,7 +56,7 @@ Install the dependencies:
 ```
 pip3 install -r requirements.txt
 ```
-- Sign up to use the [Cloudinary API](https://cloudinary.com), [Google Places API](https://developers.google.com/maps), [Google Maps Javascript API](https://developers.google.com/maps), and [Yelp API](https://www.yelp.com/developers).
+Sign up to use the [Cloudinary API](https://cloudinary.com), [Google Places API](https://developers.google.com/maps), [Google Maps Javascript API](https://developers.google.com/maps), and [Yelp API](https://www.yelp.com/developers).
 
 Save your Yelp and Cloudinary API keys to a file `secrets.sh`. The file should resemble this:
 ```
@@ -121,22 +121,22 @@ Run the app:
 python3 server.py
 ```
 
-- Go to 'localhost:5000' in your browser.
+Go to 'localhost:5000' in your browser.
 
 ## <a name="attributions"></a>Attributions
 
 **Icon used as logo**: <br/>
-`logo.png` and `static/img/svgs/logo.svg`: Icon by [constantino co](https://freeicons.io/profile/3156) on [freeicons.io](https://freeicons.io); [Direct link](https://freeicons.io/download-free-35-nz-coffee-icons-for-commercial-use/top-view-coffee-cup-icon-icon-34767#)
+`logo.png` and `static/img/svgs/logo.svg`: Icon by [constantino co](https://freeicons.io/profile/3156) on [freeicons.io](https://freeicons.io) - [Direct link](https://freeicons.io/download-free-35-nz-coffee-icons-for-commercial-use/top-view-coffee-cup-icon-icon-34767#)
 
 **Map marker icons**: <br/>
-`static/img/markers/marker-0.svg` through `static/img/markers/marker-5.svg`: Icons by [ColourCreatype](https://freeicons.io/profile/5790) on [freeicons.io](https://freeicons.io); Part of the [coffee-shop-4](https://freeicons.io/icon-list/coffe-shop-4) icon set
+`static/img/markers/marker-0.svg` through `static/img/markers/marker-5.svg`: Icons by [ColourCreatype](https://freeicons.io/profile/5790) on [freeicons.io](https://freeicons.io) - Part of the [coffee-shop-4](https://freeicons.io/icon-list/coffe-shop-4) icon set
 
 **Background Images**: <br/>
-`static/img/background/background-1.jpg`: Photo by [Petr Sevcovic](https://unsplash.com/@sevcovic23?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText); [Direct Link](https://unsplash.com/photos/qE1jxYXiwOA) <br/>
-`static/img/background/background-2.jpg`: Photo by [daan evers](https://unsplash.com/@daanelise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText); [Direct Link](https://unsplash.com/photos/tKN1WXrzQ3s) <br/>
-`static/img/background/background-3.jpg`: Photo by [Qiming Chen](https://unsplash.com/@acming92?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText); [Direct Link](https://unsplash.com/photos/lzCH2_8qRH8) <br/>
-`static/img/background/background-4.jpg`: Photo by [RR Abrot](https://unsplash.com/@rr_abrot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText); [Direct Link](https://unsplash.com/photos/pNIgH0y3upM) <br/>
-`static/img/background/background-5.jpg`: Photo by [@shawnanggg](https://unsplash.com/@shawnanggg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText); [Direct Link](https://unsplash.com/photos/nmpW_WwwVSc)
+`static/img/background/background-1.jpg`: Photo by [Petr Sevcovic](https://unsplash.com/@sevcovic23?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/qE1jxYXiwOA) <br/>
+`static/img/background/background-2.jpg`: Photo by [daan evers](https://unsplash.com/@daanelise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/tKN1WXrzQ3s) <br/>
+`static/img/background/background-3.jpg`: Photo by [Qiming Chen](https://unsplash.com/@acming92?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - Direct Link](https://unsplash.com/photos/lzCH2_8qRH8) <br/>
+`static/img/background/background-4.jpg`: Photo by [RR Abrot](https://unsplash.com/@rr_abrot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/pNIgH0y3upM) <br/>
+`static/img/background/background-5.jpg`: Photo by [@shawnanggg](https://unsplash.com/@shawnanggg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) - [Direct Link](https://unsplash.com/photos/nmpW_WwwVSc)
   
 ## <a name="about-me"></a>About Me
 Virginia Lopez Nadal is a software engineer in Minneapolis, MN. Find her on [LinkedIn](https://www.linkedin.com/in/vlopeznadal).
