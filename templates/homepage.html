@@ -10,15 +10,15 @@
             <div class="col-6">
             <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
               <div class="transparent-box">
-              <img src="static/img/svgs/logo.svg" class="logo">
-              <h1 class="app-name text-center">Cafetastic</h1>
+              <a href="/"><img src="static/img/svgs/logo.svg" class="logo"></a>
+              <a href="/"><h1 class="app-name text-center">Cafetastic</h1></a>
             <!-- Display search feature if user is logged in -->
             {% if login %}
               <!-- Cafe search form -->
               <div name="search" id="search">
                   <form id="querying" action="/cafes" method="POST">
                     <hr>
-                  <h1 class="pt-2 justify-content-center text-center">Find a cafe</h1>
+                  <h2 class="pt-2 justify-content-center text-center">Find a cafe</h2>
                   <!-- Flash messages -->
                   {% for msg in get_flashed_messages() %}
                     <p class="flash-msg">
@@ -48,7 +48,7 @@
               <!-- Login form -->
               <div name="login" id="login">
                 <hr>
-                <h1 class="pt-2 justify-content-center text-center">Login</h1>
+                <h2 class="pt-2 justify-content-center text-center">Login</h2>
                 <!-- Flash messages -->
                 {% for msg in get_flashed_messages() %}
                   <p class="flash-msg">
@@ -69,7 +69,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                   <!-- Button to display registration form -->
-                  <a href="#" id="create-account" class="p-2 d-flex justify-content-center text-center">Create an account</a>
+                  <a href="#" id="create-account" class="p-2 d-flex justify-content-center text-center bold-link">Create an account</a>
                 </div>
                 <!-- End login form -->
             {% endif %}
@@ -83,6 +83,8 @@
 {% endblock %}
 
 {% block scripts %} 
+<!-- Prevent page scrolling -->
+<script src="/static/js/scroll.js"></script>
   <!-- Select random background to display -->
   <script src="/static/js/background.js"></script>
   <!-- Switch between login form and registration form on link click-->

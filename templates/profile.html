@@ -43,7 +43,7 @@
       {% if favorite_cafes %}
         {% for cafe in favorite_cafes %}
         <div class="fav-cafe text-center">
-          <h2><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
+          <h2 class="profile-title"><a href="/cafes/{{ cafe.cafe_id }}">{{ cafe.cafe_name }}</a></h2>
           <p><img class="fav-cafe-photo" src="{{ cafe.image_url }}" /></p>
           <p class="cafe-address">{{ cafe.cafe_street }}</p>
           <p class="cafe-address">{{ cafe.cafe_city }}, {{ cafe.cafe_state }} {{ cafe.cafe_zip }}</p>
@@ -63,14 +63,16 @@
       <!-- If user has reviewed a cafe -->
       {% if user_reviews %}
         {% for i in range(user_reviews[0]|length) %}
-          <h2><a href="/cafes/{{ user_reviews[1][i][0] }}">{{ user_reviews[1][i][1] }}</a></h2>
-          <p>
-          {% for i in range(user_reviews[0][i].rating) %}
-            <i class="bi bi-star-fill"></i> 
-          {% endfor %}
-          </p>
-          <p>{{ user_reviews[0][i].date.strftime('%-m/%-d/%y %-I:%M %p') }}</p>
-          <p>{{ user_reviews[0][i].review }}</p>
+          <div class="reviewed-cafe">
+            <h2 class="profile-title"><a href="/cafes/{{ user_reviews[1][i][0] }}">{{ user_reviews[1][i][1] }}</a></h2>
+            <p>
+            {% for i in range(user_reviews[0][i].rating) %}
+              <i class="bi bi-star-fill"></i> 
+            {% endfor %}
+            </p>
+            <p>{{ user_reviews[0][i].date.strftime('%-m/%-d/%y %-I:%M %p') }}</p>
+            <p>{{ user_reviews[0][i].review }}</p>
+          </div>
         {% endfor %}
       <!-- If user has not reviewed any cafes -->
       {% else %}

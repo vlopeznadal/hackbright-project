@@ -51,12 +51,12 @@
     <!-- 1/3 columns -->
     <!-- Cafe information -->
     <div class="col-4 p-4">
-      <h1>{{ yelp_cafe.name }}</h1>
-      <p>{{ yelp_cafe.location.address1 }}</p>
-      <p>{{ yelp_cafe.location.city }}, {{ yelp_cafe.location.state }} {{ yelp_cafe.location.zip_code }}</p>
+      <h2>{{ yelp_cafe.name }}</h2>
+      <p class="cafe-address">{{ yelp_cafe.location.address1 }}</p>
+      <p class="cafe-address">{{ yelp_cafe.location.city }}, {{ yelp_cafe.location.state }} {{ yelp_cafe.location.zip_code }}</p><br>
       <p>{{ yelp_cafe.display_phone }}</p>
       {% if 'website' in google_cafe %}
-        <p><a href="{{ google_cafe['website'] }}" target="_blank">Website</a></p>
+      <a href="{{ google_cafe['website'] }}" target="_blank"><button class="btn btn-primary">Website</button></a>
       {% endif %}
     </div>
     <!-- End of Column 1 -->
