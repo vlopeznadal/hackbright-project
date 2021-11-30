@@ -317,8 +317,11 @@ def retrieve_cafe_marker_info():
 def favorite():
     """Add cafe into Favorites table of DB"""
 
+    # Setting date to time of favorites button click
+    date = datetime.now()
+
     # Creating a variable for DB addition where table is Favorites and information is in session
-    favorite = Favorites(user_id=session["user"], cafe_id=session["cafe_id"], cafe_name=session["cafe_name"], image_url=session["image_url"], 
+    favorite = Favorites(user_id=session["user"], cafe_id=session["cafe_id"], date=date, cafe_name=session["cafe_name"], image_url=session["image_url"], 
     cafe_street=session["cafe_street"], cafe_city=session["cafe_city"], cafe_state=session["cafe_state"], cafe_zip=session["cafe_zip"])
 
     # Adding entry into DB
