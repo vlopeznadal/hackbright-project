@@ -148,7 +148,7 @@
                   </p>
                   <p>{{ yelp_review_dates[i] }}</p>
                   <p>"{{ yelp_reviews[i]['text'] }}"</p>
-                  <p><button class="btn btn-primary"><a href="{{ yelp_reviews[i]['url'] }}" class="button-text">Read the rest</a></button></p>
+                  <p><a href="{{ yelp_reviews[i]['url'] }}"><button class="btn btn-primary">Read the rest</button></a></p>
                 </div>
                 {% endfor %}
               </div>
