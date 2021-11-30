@@ -49,8 +49,8 @@ def get_profile_pic(user):
 def get_user_favorites(user_id):
     """Gets all the user's favorited cafes from the DB"""
 
-    # Querying Favorites table of DB for all entries with provided user ID
-    return Favorites.query.filter(Favorites.user_id == user_id).all()
+    # Querying Favorites table of DB for all entries with provided user ID; order by newest to oldest; limits to 5
+    return Favorites.query.filter(Favorites.user_id == user_id).order_by(Favorites.date.desc()).limit(5).all()
 
 def get_user_reviews():
     """Gets all the user's reviewed cafes from the DB.
@@ -60,8 +60,8 @@ def get_user_reviews():
     # Checking to see if user has any reviewed cafes
     # If user has reviewed at least one cafe
     if Reviews.query.filter(Reviews.user_id==session["user"]).first():
-        # Setting a variable to all reviews done by the user; limits to 5
-        reviews = Reviews.query.filter(Reviews.user_id==session["user"]).limit(5).all()
+        # Setting a variable to all reviews done by the user; order by newest to oldest; limits to 5
+        reviews = Reviews.query.filter(Reviews.user_id==session["user"]).order_by(Reviews.date.desc()).limit(5).all()
     # If user has not reviewed any cafes
     else:
         return ""
