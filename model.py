@@ -28,6 +28,7 @@ class Favorites(db.Model):
 
     query_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    date = db.Column(db.DateTime, nullable=False)
     cafe_id = db.Column(db.String(50), nullable=False)
     cafe_name = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(100))
