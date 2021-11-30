@@ -5,10 +5,6 @@ body, html {
     font-family: 'Karla', sans-serif;
 }
 
-footer { 
-    vertical-align: top;
-}
-
 .background {
     background-size: cover;
 }
