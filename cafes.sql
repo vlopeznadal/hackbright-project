@@ -27,6 +27,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.favorites (
     query_id integer NOT NULL,
     user_id integer,
+    date timestamp without time zone NOT NULL,
     cafe_id character varying(50) NOT NULL,
     cafe_name character varying(50) NOT NULL,
     image_url character varying(100),
@@ -160,7 +161,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: virginialopeznadal
 --
 
-COPY public.favorites (query_id, user_id, cafe_id, cafe_name, image_url, cafe_street, cafe_city, cafe_state, cafe_zip) FROM stdin;
+COPY public.favorites (query_id, user_id, date, cafe_id, cafe_name, image_url, cafe_street, cafe_city, cafe_state, cafe_zip) FROM stdin;
 \.
 
 
