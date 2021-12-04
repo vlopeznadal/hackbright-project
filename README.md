@@ -1,4 +1,4 @@
-![Cafetastic logo](https://github.com/vlopeznadal/hackbright-project/blob/main/logo.jpg?raw=true "Cafetastic")
+![Cafetastic logo](https://github.com/vlopeznadal/hackbright-project/blob/main/logo.png?raw=true "Cafetastic")
 
 [![Build Status](https://app.travis-ci.com/vlopeznadal/hackbright-project.svg?branch=main)](https://app.travis-ci.com/vlopeznadal/hackbright-project)
 
