@@ -1,4 +1,4 @@
-![alt text](https://github.com/vlopeznadal/hackbright-project/blob/main/logo.png?raw=true "Cafetastic")
+![Cafetastic logo](https://github.com/vlopeznadal/hackbright-project/blob/main/logo.jpg?raw=true "Cafetastic")
 
 [![Build Status](https://app.travis-ci.com/vlopeznadal/hackbright-project.svg?branch=main)](https://app.travis-ci.com/vlopeznadal/hackbright-project)
 
@@ -21,21 +21,39 @@ Cafetastic makes finding an enjoyable cafe near you easier. This app provides a 
 
 Register for an account and login to use any app features.
 
+![Registration and Login](/static/img/gifs/register-login.gif)
+
 Search for a cafe by zipcode and radius.
+
+![Cafe Search](/static/img/gifs/search-cafes.gif)
 
 View the cafe results of a search on map and listed out.
 
+![View Cafe Results](/static/img/gifs/see-results.gif)
+
 View a particular cafe's details, including reviews from Google and Yelp.
+
+![View Cafe Details](/static/img/gifs/view-details.gif)
 
 Write your own review and pick a rating for a cafe.
 
+![Write Cafe Review](/static/img/gifs/write-review.gif)
+
 Edit your cafe review.
+
+![Edit Cafe Review](/static/img/gifs/edit-review.gif)
 
 Favorite a cafe.
 
+![Favorite a Cafe](/static/img/gifs/fav-cafe.gif)
+
 Upload your own profile picture.
 
+![Upload Profile Picture](/static/img/gifs/upload-pic.gif)
+
 View your favorited and reviewed cafes.
+
+![View User Content](/static/img/gifs/view-favs-reviews.gif)
 
 
 ## <a name="installation"></a>Set Up 🛠
