@@ -1,7 +1,5 @@
 ![Cafetastic logo](https://github.com/vlopeznadal/hackbright-project/blob/main/logo.png?raw=true "Cafetastic")
 
-[![Build Status](https://app.travis-ci.com/vlopeznadal/hackbright-project.svg?branch=main)](https://app.travis-ci.com/vlopeznadal/hackbright-project)
-
 Cafetastic makes finding an enjoyable cafe near you easier. This app provides a way to see reviews and ratings from Yelp and Google in one place. Users are also able to write up their own reviews and favorite cafes for quick view on their profile page.
 
 ## Table of Contents ☕️
@@ -141,7 +139,7 @@ Run the app:
 python3 server.py
 ```
 
-* Go to 'localhost:5000' in your browser. 
+* Go to 'localhost:5000' in your browser to view application locally.
 
 ## <a name="attributions"></a>Attributions 🙏🏻
 
