@@ -59,7 +59,7 @@ h2 {
 
 /* Links */
 
-a, a:hover {
+a, a:hover, a:visited, a:active {
     text-decoration: none;
     color: #AE724C;
 }
@@ -79,13 +79,8 @@ a, a:hover {
 
 /* Buttons */
 
-.btn-primary {
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus{
     color: black;
-    border-color: #AE724C;
-    background-color: #AE724C;
-}
-
-.btn-primary:hover {
     border-color: #AE724C;
     background-color: #AE724C;
 }
