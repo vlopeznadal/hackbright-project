@@ -29,6 +29,8 @@ View a particular cafe's details, including reviews from Google and Yelp.
 
 Write your own review and pick a rating for a cafe.
 
+Edit your cafe review.
+
 Favorite a cafe.
 
 Upload your own profile picture.
