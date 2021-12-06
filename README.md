@@ -4,6 +4,7 @@ Cafetastic makes finding an enjoyable cafe near you easier. This app provides a 
 
 ## Table of Contents ☕️
 * [Tech Stack](#tech-stack)
+* [Video Demo](#video-demo)
 * [Features](#features)
 * [Installation](#installation)
 * [Attributions](#attributions)
@@ -14,6 +15,12 @@ Cafetastic makes finding an enjoyable cafe near you easier. This app provides a 
 **Backend**:  Flask, PostgreSQL, Python, SQLAlchemy <br/>
 **Frontend**:  AJAX, Bootstrap, CSS, HTML, Jinja2, JavaScript, jQuery <br/>
 **APIs**:  Cloudinary, Google Maps JavaScript, Google Places, Yelp
+
+## <a name="video-demo"></a>Video Demo 🎥
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=ST0pxX8uB3I
+" target="_blank"><img src="http://img.youtube.com/vi/ST0pxX8uB3I/0.jpg" 
+alt="Cafetastic Full Stack Web App Video Demo" width="240" height="180" border="10" /></a>
 
 ## <a name="features"></a>Features 🔎
 
