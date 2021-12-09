@@ -4,6 +4,8 @@ Grabbing the user's profile pic to display with reviews */
 // Once HTML document has been loaded
 $(document).ready(function(){
 
+  $('#updating').hide()
+
   // Grabbing reviews from Reviews table in DB
   $.post('/user-reviews', response => {
 
@@ -217,11 +219,6 @@ $("#updating").submit(function(evt) {
       // Clear out edit form 
       $('#updating').trigger("reset");
 
-      // Creating a variable for the current value of the range input
-      let current_value = $('input[type=range]').val();
-
-      // Display updated range value once form is emptied (default value of 3)
-      $('.range-value').html(" " + current_value);
   });
   }
 });
@@ -254,12 +251,6 @@ $(document).on('click', '.edit-review', function() {
 
     // Clear out editing form
     $('#updating').trigger("reset");
-
-    // Creating a variable for the current value of the range input (default value of 3)
-    let current_value = $('input[type=range]').val();
-
-    // Display updated range value once form is emptied (default value of 3)
-    $('.range-value').html(" " + current_value);
 
     // Hide DIV of edit form
     $('.edit-form').hide();
