@@ -210,47 +210,33 @@
               <!-- End DIV for review display -->
 
               <!-- If user review exists -->
-              {% if user_review %}
+              {% if user_review == False %}
 
-              <!-- Review editing form -->
-              <div class="edit-form">
-                <form name="updating" id="updating" action="/updating" method="POST">
+              <!-- Review form -->
+              <div class="review-form">
+                <form name="reviewing" id="reviewing" action="/reviewing" method="POST" class="pt-4">
                   <div class="mb-3">
                     <!-- Rating slider -->
-                    <label for="updatedrating" class="form-label">Rating:</label><span class="range-value"></span>
-                    <input type="range" class="form-range" min="1" max="5" id="updatedrating" name="updatedrating">
+                    <label for="rating" class="form-label">Rating:</label><span class="review-range-value"> 3</span>
+                    <input type="range" class="form-range" min="1" max="5" id="rating" name="rating">
                     <!-- Review text box -->
-                    <label for="updatedreview" class="form-label">Review</label>
-                    <textarea class="form-control" id="updatedreview" rows="3" name="updatedreview"></textarea>
+                    <label for="review" class="form-label">Review</label>
+                    <textarea class="form-control" id="review" rows="3" name="review"></textarea>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               </div>
-              <!-- End review editing form -->
-
-              <!-- Else if user review doesn't exist -->
-              {% else %}
-
-              <!-- Review form -->
-              <form name="reviewing" id="reviewing" action="/reviewing" method="POST" class="pt-4">
-                <div class="mb-3">
-                  <!-- Rating slider -->
-                  <label for="rating" class="form-label">Rating:</label><span class="range-value"></span>
-                  <input type="range" class="form-range" min="1" max="5" id="rating" name="rating">
-                  <!-- Review text box -->
-                  <label for="review" class="form-label">Review</label>
-                  <textarea class="form-control" id="review" rows="3" name="review"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
               <!-- End review form -->
+
+              {% endif %}
+              <!-- End of if statement -->
 
               <!-- Review editing form -->
               <div class="edit-form">
                 <form name="updating" id="updating" action="/updating" method="POST">
                   <div class="mb-3">
                     <!-- Rating slider -->
-                    <label for="updatedrating" class="form-label">Rating:</label><span class="range-value"></span>
+                    <label for="updatedrating" class="form-label">Rating:</label><span class="edit-range-value"> 3</span>
                     <input type="range" class="form-range" min="1" max="5" id="updatedrating" name="updatedrating">
                     <!-- Review text box -->
                     <label for="updatedreview" class="form-label">Review</label>
@@ -263,8 +249,6 @@
             </div>
           <!-- End of accordion item 3 -->
         </div>
-              {% endif %}
-              <!-- End of if statement -->
       </div>
     </div>
   </div>
